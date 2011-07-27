@@ -1,0 +1,156 @@
+<!doctype html>
+
+<html>
+  <head>
+    <style type="text/css">
+      .good {
+        background-color: lightgreen;
+      }
+      
+      .bad {
+        background-color: red;
+      }
+      
+      .important {
+        font-weight: bold;
+      }
+    </style>
+    
+    <script type="text/javascript">
+      /* 
+        Internet Explorer's list of standard XHR PROGIDS. 
+      */
+      var XHR_PROGIDS = [
+        'MSXML2.XMLHTTP.6.0', 'MSXML2.XMLHTTP.3.0', 'MSXML2.XMLHTTP',
+        'Microsoft.XMLHTTP'
+      ];
+
+      /*
+        Standard way to grab XMLHttpRequest object.
+      */
+      function xhrObj() {
+        if (typeof XMLHttpRequest != 'undefined') {
+          return new XMLHttpRequest();
+        } else if (ActiveXObject) {
+          var xhr = null;
+          var i; // save the good PROGID for quicker access next time
+          for (i = 0; i < XHR_PROGIDS.length && !xhr; ++i) {
+            try {
+              xhr = new ActiveXObject(XHR_PROGIDS[i]);
+            } catch(e) {}
+          }
+
+          if (!xhr) {
+            throw new Error('XMLHttpRequest object not available on this platform');
+          }
+
+          return xhr;
+        }
+      }
+      
+      var results = [];
+      
+      window.onload = function() {
+        fetch('../svg.swf', 'application/x-shockwave-flash', 
+              'swfResult', fetchCallback);
+        fetch('../svg.htc', 'text/x-component', 'htcResult', fetchCallback);
+        fetch('../../samples/svg-files/helloworld.svg', 'image/svg+xml',
+              'svgResult', fetchCallback);
+      }
+      
+      function fetch(fileName, correctMimeType, resultsID, callback) {
+        var req = xhrObj();
+
+        // bust the cache since IE's XHR GET requests are wonky
+        fileName += '?' + new Date().getTime();
+
+        req.onreadystatechange = function() {
+          if (req.readyState == 4) {
+            var resultsNode = document.getElementById(resultsID);
+            if (req.status == 200) { // done
+              var mimeType = req.getResponseHeader('Content-Type');
+              if (mimeType == correctMimeType) {
+                resultsNode.className += ' good';
+                resultsNode.innerHTML = 'Good!';
+                callback(true);
+              } else {
+                resultsNode.className += ' bad';
+                resultsNode.innerHTML = 'Bad!';
+                callback(false);
+              }
+            } else { // error
+              resultsNode.className += ' bad';
+              resultsNode.innerHTML = '';
+              resultsNode.appendChild(document.createTextNode(
+                    'Failed: ' + req.status + ': ' + req.statusText));
+              callback(false);
+            }
+
+            req = null;
+          }
+        };
+
+        req.open('GET', fileName, true);
+        req.send(null);
+      }
+      
+      function fetchCallback(success) {
+        results.push(success);
+        
+        if (results.length == 3) {
+          var finalResults = true;
+          for (var i = 0; i < results.length; i++) {
+            if (!results[i]) {
+              finalResults = false;
+            }
+          }
+          
+          var totalResults = document.getElementById('totalResults');
+          if (finalResults) {
+            totalResults.className += ' good';
+            totalResults.innerHTML = 'Everything works!';
+          } else {
+            totalResults.className += ' bad';
+            totalResults.innerHTML = 'A MIME type is misconfigured!';
+          }
+        }
+      }
+    </script>
+  </head>
+  
+  <body>
+    <p>This page checks to make sure that your web server has its MIME types configured correctly. Upload it to your web server and then load this page in your web browser.</p>
+    
+    <p class="important">Web server configured correctly: <span id="totalResults">Checking...</span></p>
+    
+    <table id="resultsTable" border="1" cellpadding="5" cellpadding="5">
+      <tr>
+        <th>File Type</th>
+        <th>MIME Type</th>
+        <th>File Name</th>
+        <th>Works?</th>
+      </tr>
+      
+      <tr>
+        <td>Flash SWF</td>
+        <td>application/x-shockwave-flash</td>
+        <td>svg.swf</td>
+        <td id="swfResult" class="important">Checking...</td>
+      </tr>
+      
+      <tr>
+        <td>Microsoft Behavior HTC</td>
+        <td>text/x-component</td>
+        <td>svg.htc</td>
+        <td id="htcResult" class="important">Checking...</td>
+      </tr>
+      
+      <tr>
+        <td>SVG files</td>
+        <td>image/svg+xml</td>
+        <td>helloworld.svg</td>
+        <td id="svgResult" class="important">Checking...</td>
+      </tr>
+    </table>
+  </body>
+</html>
