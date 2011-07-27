@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="gen-js/Cell.js" type="text/javascript"></script>
+        <script src="gen-js/Set.js" type="text/javascript"></script>
+        <script src="gen-js/GameBoard.js" type="text/javascript"></script>
+        <script src="gen-js/Game.js" type="text/javascript"></script>
+        
+        <script src="js/trident.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div>
+          <span>Score:</span>
+          <span id="score">
+        </div>
+        <canvas id="game" width="375" height="375"></canvas>
+        <script type="text/javascript">
+            var game = new Game();
+            game.gameboard.drawBoard();
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,9 @@
+Game Flow:
+
+1. User visits home page.
+2. User is assigned random id as their name
+3. User is given option to set their name(login)
+4. User now in Game Lobby. From here they can send messages, enter or create game rooms.
+
+Create Game:
+1. User clicks button

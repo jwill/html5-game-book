@@ -1,0 +1,50 @@
+<!doctype html>
+
+<html>
+
+	<head>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+		<title>cufón / examples / gradient</title>
+
+		<style type="text/css">
+
+			body {
+				background: #fff;
+				color: #555;
+			}
+
+			h1 {
+				font: normal 200px Arial, Verdana, Helvetica, sans-serif;
+				margin: 0.8em 0 0 0;
+				text-align: center;
+			}
+
+		</style>
+
+		<script src="js/cufon.js" type="text/javascript"></script>
+        
+        
+        
+
+	</head>
+
+	<body>
+    <script src="js/raphael-min.js" type="text/javascript"></script>
+    <script src="js/Vegur.font.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        
+    
+              var paper = Raphael(0, 0, 600, 500);
+            paper.text(10,10, "test");
+
+            console.log(paper.getFont("Vegur"));
+            var letters = paper.print(100, 100, "Test string", paper.getFont("Vegur"), 72);
+            letters[0].attr({fill: "#f00"});
+            letters.attr({fill:  "90-#fff-#000" , stroke: "#00FF00", opacity: 0.2, rotation: 25});
+        </script>
+
+	</body>
+
+</html>

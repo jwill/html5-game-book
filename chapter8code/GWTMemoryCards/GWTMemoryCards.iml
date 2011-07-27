@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="gwt" name="GWT">
+      <configuration>
+        <setting name="compilerMaxHeapSize" value="128" />
+        <setting name="gwtScriptOutputStyle" value="OBF" />
+        <setting name="gwtSdkUrl" value="file://$USER_HOME$/Downloads/gwt-2.1.0" />
+        <setting name="webFacet" value="Web" />
+        <packaging>
+          <module name="Game" path="/Game" />
+          <module name="com.google.code.gwt.html5.media.HTML5Media" path="/html5_media" />
+          <module name="com.hydro4ge.raphaelgwt.RaphaelGWT" path="/com.hydro4ge.raphaelgwt.RaphaelGWT" />
+          <module name="com.informit.html5.Game" path="/com.informit.html5.Game" />
+          <module name="com.informit.html5.Game2" path="/com.informit.html5.Game2" />
+          <module name="com.mySampleApplication.MySampleApplication" path="/MySampleApplication" />
+        </packaging>
+      </configuration>
+    </facet>
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/war/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/war" relative="/" />
+        </webroots>
+        <sourceRoots />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="gwt-user" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/gwt-html5-media-0.1-SNAPSHOT.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>
+

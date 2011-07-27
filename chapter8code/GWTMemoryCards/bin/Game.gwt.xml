@@ -1,0 +1,13 @@
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0//EN"
+        "http://google-web-toolkit.googlecode.com/svn/releases/2.0/distro-source/core/src/gwt-module.dtd">
+<module>
+
+    <inherits name='com.google.gwt.user.User'/>
+    <!-- Inherit Raphael support                         -->
+    <inherits name='com.hydro4ge.raphaelgwt.RaphaelGWT' />
+    <!-- Inherit sound support                           -->
+    <inherits name='com.google.code.gwt.html5.media.HTML5Media'/>
+
+    <entry-point class='client.Game'/>
+
+</module>

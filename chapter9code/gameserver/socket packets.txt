@@ -1,0 +1,13 @@
+Example packet:
+{ operation: '',
+  value: ' '
+  json: { }
+  }
+  
+Operations:
+createRoom
+deleteRoom
+moveToRoom
+message (to person)
+broadcast
+broadcastRoom ?

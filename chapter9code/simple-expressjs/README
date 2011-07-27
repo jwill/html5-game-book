@@ -1,0 +1,7 @@
+Start the server by running
+
+coffee simple.coffee
+
+or 
+
+coffee advanced.coffee

@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Lobster';
+  font-style: italic;
+  font-weight: normal;
+  src: url('../ttf/Lobster.ttf') format("TrueType");
+}
+@font-face {
+	font-family:'ReenieBeanie';
+	src: url('../ttf/ReenieBeanie.ttf') format("TrueType");
+}

@@ -1,0 +1,71 @@
+<html><body>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<style type="text/css">
+	  html { height: 100% }
+	  body { height: 100%; margin: 0px; padding: 0px }
+	  #map_canvas { height: 100% }
+	</style>
+<script type="text/javascript"
+    src="http://maps.google.com/maps/api/js?sensor=true">
+</script>
+  <script>
+    var map;
+    var geodan = new google.maps.LatLng(0,0);
+    var osmMapType = new google.maps.ImageMapType({
+	getTileUrl: function(coord, zoom) {
+		return "http://tile.openstreetmap.org/" +
+		zoom + "/" + coord.x + "/" + coord.y + ".png";
+	},
+	tileSize: new google.maps.Size(256, 256),
+	isPng: true,
+	alt: "OpenStreetMap layer",
+	name: "OpenStreetMap",
+	maxZoom: 19
+});
+ 
+function initialize() {
+	var mapOptions = {
+  	  	  zoom: 8,
+  	  	  center: geodan,
+  	  	  mapTypeId: 'OSM',
+  	  	  mapTypeControlOptions: {
+  	  	  	  mapTypeIds: ['OSM', google.maps.MapTypeId.ROADMAP],
+  	  	  	  style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+  	  	  }
+  	};
+	map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
+	map.mapTypes.set('OSM',osmMapType);
+	map.setMapTypeId('OSM');
+}
+ 
+
+    if(navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(pos) {
+			var latitude = pos.coords.latitude;
+			var longitude = pos.coords.longitude;
+
+			var options = {
+				 position:new google.maps.LatLng(latitude, longitude)
+				,title:"Your location"};
+				
+			var marker = new google.maps.Marker(options);
+			
+			var circle = new google.maps.Circle({
+				map:map, radius:pos.coords.accuracy
+			});
+			circle.bindTo('center', marker, 'position');
+			
+			marker.setMap(map);
+			
+			map.setCenter( new google.maps.LatLng(latitude, longitude));
+		}, 
+		function(error) {
+			console.log(error.message);
+		},{enableHighAccuracy:true});
+	}
+  </script>
+  <body onload="initialize()">
+  <div id="map_canvas" style="width:100%; height:100%"></div>
+</body>
+</body></html>

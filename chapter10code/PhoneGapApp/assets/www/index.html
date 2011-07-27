@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script src="zepto.min.js"></script>
+		<title>Test Application</title>
+	</head>
+	<body>
+        <div id="t"></div>
+		<canvas id="canvas" height="200" width="200" tabindex="1"></canvas>
+		<div id="os"></div>
+		<div id="browserWidth"></div>
+		<div id="browserHeight"></div>
+		
+        <script>
+            function determineOS() {
+              if ($.os.ios == true || $.os.iphone == true || $.os.ipad == true ) {
+                return "iOS/iPhone/iPad " + $.os.version;
+              } else if ($.os.android == true) {
+                return "Android "+ $.os.version
+              } else {
+                return navigator.userAgent;
+              }
+            }
+            
+            $("#os").text("Operating System:"+ determineOS());
+            $("#browserHeight").text("Height: "+window.innerHeight + "px" + "\n");
+            $("#browserWidth").text("Width: "+window.innerWidth);
+            
+            $('#canvas').bind('click', function(event){ $("#t").text('tapped at '+new Date()) });
+			$("#canvas").bind('tap', function(evt) {
+                $("#t").text('tapped at '+new Date());
+			});
+		</script>
+	</body>
+</html>

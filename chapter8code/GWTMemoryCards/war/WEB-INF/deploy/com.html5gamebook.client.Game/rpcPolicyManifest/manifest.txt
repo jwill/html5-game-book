@@ -1,0 +1,2 @@
+# Module com.html5gamebook.client.Game
+# RPC service class, partial path of RPC policy file

@@ -1,0 +1,8 @@
+Reviewers: I noticed some issues where it doesn't properly wait for the player to finish before starting to play the next sequence. Will fix that during the edits.
+
+Link to game on TapJS: copyme.tapjs.com
+Link to FB version: http://apps.facebook.com/copymegame/
+
+That same code is used for the FB version, can whitelist you all if you'd like. Am not sure if it only requires login to FB. The only difference it that it posts a status update when the game is over. 
+
+Same deal with the Chrome, can whitelist.

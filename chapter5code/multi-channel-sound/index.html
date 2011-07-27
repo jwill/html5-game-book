@@ -1,0 +1,17 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Playing Multiple Sounds at Once</title>
+		<script type="text/javascript" src="js/playSounds.js"></script>
+	</head>
+	<body>
+		<audio id="acoustic-loop" src="sounds/16171__harri__accoustic_loop_2_120bpm.mp3"></audio>
+		<audio id="ambient-loop" src="sounds/4048__RealRhodesSounds__ambientloop83bpm.wav"></audio>
+		<audio id="chord" src="sounds/4197__RealRhodesSounds__Cminor7.wav"></audio>
+		
+		<a href="javascript:play_multi_channel('acoustic-loop')">Acoustic Loop</a><br/>
+		<a href="javascript:play_multi_channel('ambient-loop')">Ambient Loop</a><br/>
+		<a href="javascript:play_multi_channel('chord')">C Minor 7 Chord</a><br/>
+	</body>
+</html>

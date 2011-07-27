@@ -1,0 +1,84 @@
+# Tic Tac Toe Logic
+
+exports.TicTacToe = (nowjs, everyone, cache) ->
+	console.log("here:"+everyone)
+	everyone.now.startTicTacToeGame = (room, players) ->
+		group = nowjs.getGroup(room)
+		roomState = {}
+	
+		# Pick person to start
+		i = Math.floor Math.random() * 2
+		roomState.X = players[0]
+		roomState.O = players[1]
+		roomState.turn = if i is 0 then 'X' else 'O'
+		roomState.message = ""
+		
+		# initialize gameboard
+		gameboard = []
+		for i in [0...3]
+			array = []
+			for j in [0...3]
+				array.push("-")
+			gameboard.push(array)
+		roomState.board = gameboard
+		console.log(roomState)
+		cache.put(room, roomState)
+	
+	everyone.now.verifyTicTacToeMove = (x, y) ->
+		group = nowjs.getGroup(this.now.room)
+		roomState = cache.get(this.now.room)
+		board = roomState.board
+		if (board[x][y] == "-")
+			return true
+		else return false
+	
+	everyone.now.completeTicTacToeMove = (x, y, player) ->
+		group = nowjs.getGroup(this.now.room)
+		roomState = cache.get(this.now.room)
+		board = roomState.board
+	
+		otherPlayer = if player is 'X' then 'O' else 'X'
+		if group.now.verifyTicTacToeMove(x,y)
+			board[x][y] = player
+			group.now.checkForWin(roomState)
+			roomState.turn = otherPlayer
+			cache.put(this.now.room, roomState)
+		else 
+			roomState.message = 'Player #{player}, Please try again.'
+			cache.put(this.now.room, roomState)
+			group.now.receiveGameState(roomState)
+	
+	exports.checkForTicTacToeWin = (roomState) ->
+		board = roomState.board
+		lines = [
+			[[0,0], [1,1], [2,2]],	# diagonals
+			[[0,2], [1,1], [2,0]], 	
+			[[0,0], [0,1], [0,2]],	# verticals
+			[[1,0], [1,1], [1,2]],
+			[[2,0], [2,1], [2,2]],
+			[[0,0], [1,0], [2,0]],	# horizontals
+			[[0,1], [1,1], [2,1]],
+			[[0,2], [1,2], [2,2]]
+		]
+		
+		emptySpaces = 0;
+		for i in [0...lines.length]
+			line = lines[i];
+			a = board[line[0][0]][line[0][1]];
+			b = board[line[1][0]][line[1][1]];
+			c = board[line[2][0]][line[2][1]];
+			
+			 
+			emptySpaces++ if a is "" or b is "" or c is ""
+			
+			if (a != "" && a == b && a == c)
+				roomState.message = "Player #{a} wins!"
+				cache.put(this.now.room, roomState)
+				group.now.receiveGameState(roomState)
+		
+		if (emptySpaces == 0) 
+			roomState.message = "There was a draw"
+			cache.put(this.now.room, roomState)
+			group.now.receiveGameState(roomState)
+		
+		""

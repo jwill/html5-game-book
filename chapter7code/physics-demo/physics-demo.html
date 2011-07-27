@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<title>Physics Demo</title>
+		<script src="../Three.js"></script>
+		<script src="../zepto.min.js"></script>
+		<script src="../RequestAnimationFrame.js"></script>
+		<script src="jiglibjs.0.9.0.2.js"></script>
+	</head>
+	<body>
+		<div id="container"/>
+		<script type="text/javascript">
+			var camera, scene, renderer, system, sphere;
+			var HEIGHT, WIDTH;
+			var t0 = new Date().getTime();
+			var system;
+			
+			function init() {
+				// scene size
+				HEIGHT = 480, WIDTH = 640;
+				
+				// camera properties
+				var FOV = 45
+				, ASPECT = WIDTH/HEIGHT
+				, NEAR = 0.1
+				, FAR = 10000;
+				
+				// create a renderer, camera, and scene
+				renderer = new THREE.WebGLRenderer();
+				renderer.setSize (WIDTH, HEIGHT);
+				camera = new THREE.Camera(FOV, ASPECT, NEAR, FAR);
+				camera.position.z = 100;
+				//camera.position.y = 30;
+				
+				scene = new THREE.Scene();
+				drawScene();
+				
+				
+				// add lighting
+				var light = new THREE.DirectionalLight(0xFFFFFF);
+				
+				light.position.x = 10;
+				light.position.y = 20;
+				light.position.z = 13;
+				
+				scene.addLight(light);
+				
+				// attach the scene to the DOM
+				$("#container").get(0).appendChild(renderer.domElement);
+			}
+			
+			function drawScene() {
+				// create the ground
+				var plane = new THREE.Mesh(
+					new THREE.Plane(75,75,10,10), new THREE.MeshLambertMaterial({color:0x222222})
+				);
+				plane.translateY(-10);
+				plane.rotation.x = -70;
+				scene.addObject(plane);
+				
+				var ground = new jigLib.JPlane();
+				ground.set_y(-10);
+				ground.set_rotationX(-70);
+				ground.set_movable(false);
+				system.addBody(ground);
+				plane.rigidBody = ground;
+				
+				
+				var material = new THREE.MeshLambertMaterial({color:0xFF0000});
+				//create mesh
+				sphere = new THREE.Mesh(
+					new THREE.Sphere(8, 16, 16), material
+				);
+				sphere.position.y = 25;
+				scene.addObject(sphere);
+				
+				// create rigid body
+				var body = new jigLib.JSphere(null, 8);
+				body.set_mass(8);
+				body.moveTo(jigLib.Vector3DUtil.create(sphere.position.x, sphere.position.y, sphere.position.z, 0));
+				system.addBody(body);
+				sphere.rigidBody = body;
+			}
+			
+			function v(x,y,z) {
+				return new THREE.Vertex(new THREE.Vector3(x, y, z))
+			}
+			
+			function initJigLib() {
+				system = jigLib.PhysicsSystem.getInstance();
+				system.setSolverType("FAST");
+				system.setGravity( jigLib.Vector3DUtil.create(0, -9.8, 0, 0) );
+			}
+		
+			function animate() {
+				requestAnimationFrame (animate);
+				updateDynamicsWorld();
+				render();
+			}
+			
+			function render() {
+				renderer.render(scene, camera);
+			}
+			
+			function updateDynamicsWorld() {
+				// find elapsed time from last update
+				var t1 = new Date().getTime()
+				var elapsedTime = t1 - t0;
+				t0 = t1;
+				
+				system.integrate(elapsedTime/1000);
+				for (var i = 0; i<scene.objects.length; i++) {
+					var mesh = scene.objects[i];
+					if (mesh.rigidBody) {
+						var position = mesh.rigidBody.get_currentState().position;
+						var orientation = mesh.rigidBody.get_currentState().get_orientation().glmatrix;
+						
+						mesh.position.x = position[0];
+						mesh.position.y = position[1];
+						mesh.position.z = position[2];
+						
+						mesh.rotation.x = mesh.rigidBody.get_rotationX();
+						mesh.rotation.y = mesh.rigidBody.get_rotationY();
+						mesh.rotation.z = mesh.rigidBody.get_rotationZ();
+					}
+				}
+			}
+			
+			initJigLib();
+			init();
+			animate();
+		</script>
+</body>
+</html>
+

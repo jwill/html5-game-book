@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="gwt-user">
+    <archive path="/home/jwill/gwt/gwt-user.jar" />
+  </library>
+  <library name="Android 2.1-update1 Platform">
+    <archive path="/home/jwill/android/platforms/android-7/android.jar" />
+  </library>
+</eclipse-userlibraries>
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<title>Game of Life Demo</title>
+		<script src="prototype.js"></script>
+		<script src="../Three.js"></script>
+		<script src="../zepto.min.js"></script>
+		<script src="Props.js"></script>
+		<script src="Cell.js"></script>
+		<script src="CellsGrid.js"></script>
+		<script src="LifeProperties.js"></script>
+		
+		<script src="../RequestAnimationFrame.js"></script>
+	</head>
+	<body>
+		<div id="container"/>
+		<script type="text/javascript">
+			var camera, scene, renderer, grid;
+			var HEIGHT, WIDTH;
+			var t0 = new Date().getTime();
+			var system;
+			
+			function init() {
+				// scene size
+				HEIGHT = 640, WIDTH = 800;
+				
+				// camera properties
+				var FOV = 45
+				, ASPECT = WIDTH/HEIGHT
+				, NEAR = 0.1
+				, FAR = 10000;
+				
+				// create a renderer, camera, and scene
+				renderer = new THREE.WebGLRenderer();
+				renderer.setSize (WIDTH, HEIGHT);
+				camera = new THREE.Camera(FOV, ASPECT, NEAR, FAR);
+				camera.position.z = 25;
+				//camera.position.y = 30;
+				
+				scene = new THREE.Scene();
+				drawScene();
+				
+				
+				// add lighting
+				var light = new THREE.DirectionalLight(0xFFFFFF);
+				
+				light.position.x = 10;
+				light.position.y = 20;
+				light.position.z = 13;
+				
+				scene.addLight(light);
+				
+				// attach the scene to the DOM
+				document.body.appendChild(renderer.domElement);
+			}
+			
+			function drawScene() {
+				grid = new CellsGrid(new LifeProperties("{}"));
+				
+			}
+			
+			function v(x,y,z) {
+				return new THREE.Vertex(new THREE.Vector3(x, y, z))
+			}
+		
+			function animate() {
+				requestAnimationFrame (animate);
+				render();
+			}
+			
+			function render() {
+				if (grid.transCounter < Props.MAX_TRANS)
+					grid.update();
+			//	else grid.resetGrid();
+				renderer.render(scene, camera);
+			}
+			
+			init();
+			animate();
+		</script>
+</body>
+</html>
+

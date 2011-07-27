@@ -1,0 +1,52 @@
+doctype 5
+html ->
+	head ->
+		title "#{@title}"
+		link rel: 'stylesheet', href: 'css/main.css'
+		script src: '/nowjs/now.js'
+		script src: 'js/zepto.min.js'
+#		script src: 'http://connect.facebook.net/en_US/all.js'
+#		script src: 'http://www.google.com/jsapi?key=ABQIAAAAjvT7y_fG5_5uhayAQkU93BTsdtrko7k3zN3EvXsgf0CQ-vEjSxQZm-w8L7MZGWHy0KLpG9U1PF-sjQ'
+		# games
+		script src: 'TicTacToe/TicTacToe.js'
+		# War
+		script src: 'War/js/raphael-min.js'
+		script src: 'War/js/War.js'
+		script src: 'War/js/Deck.js'
+		script src: 'War/js/Card.js'
+		
+	coffeescript ->
+			# Load Google Friend Connect
+			google.load('friendconnect', '0.8')
+			
+			window.toggleElement = (element, visibility) ->
+				$(element).get(0).style.display = visibility
+				$('#fade').get(0).style.display = visibility
+				""
+			
+
+	body ->
+		div id:'fb-root', ->
+		coffeescript ->
+			FB.init({
+					appId:'222144411135484',
+					cookie:true,
+					xfbml:true
+			})
+		div id: 'header', ->
+			span style:'font-size:2em', -> "PlayTime"
+			button style:'float:right;', name:'Login', onclick:"toggleElement('#loginBox','block');", -> 'Login/Sign up'
+			br ->
+			button -> 'TicTacToe'
+			span -> '  '
+			button -> 'Pong'
+			span -> '  '
+			button -> 'War'
+			span -> '  '
+			button -> 'Battleship'
+			#div style:'float:right;',->
+		
+		div id: 'content', ->
+  			@body
+  	
+

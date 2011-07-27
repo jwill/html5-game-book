@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/3/trunk/src/main/java/com/google/code/gwt/html5/media/client
+END
+Media.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/3/trunk/src/main/java/com/google/code/gwt/html5/media/client/Media.java
+END
+VideoElement.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3/trunk/src/main/java/com/google/code/gwt/html5/media/client/VideoElement.java
+END
+Audio.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/3/trunk/src/main/java/com/google/code/gwt/html5/media/client/Audio.java
+END
+ReadyState.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3/trunk/src/main/java/com/google/code/gwt/html5/media/client/ReadyState.java
+END
+Video.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/3/trunk/src/main/java/com/google/code/gwt/html5/media/client/Video.java
+END
+MediaError.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3/trunk/src/main/java/com/google/code/gwt/html5/media/client/MediaError.java
+END
+MediaElement.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3/trunk/src/main/java/com/google/code/gwt/html5/media/client/MediaElement.java
+END
+NetworkState.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3/trunk/src/main/java/com/google/code/gwt/html5/media/client/NetworkState.java
+END
+AudioElement.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3/trunk/src/main/java/com/google/code/gwt/html5/media/client/AudioElement.java
+END
+TimeRanges.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/3/trunk/src/main/java/com/google/code/gwt/html5/media/client/TimeRanges.java
+END

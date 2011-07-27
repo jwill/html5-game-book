@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>Web Worker example</title>
+ </head>
+ <body>
+  <p>The time is now: <span id="result"></span></p>
+  <script>
+   var worker = new Worker('worker.js');
+   worker.onmessage = function (event) {
+     document.getElementById('result').innerText = event.data;
+     //worker.terminate();
+   };
+  </script>
+ </body>
+</html>

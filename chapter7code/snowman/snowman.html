@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Snowman Three.js Demo</title>
+		<script src="../Three.js"></script>
+		<script src="../zepto.min.js"></script>
+		<script src="../RequestAnimationFrame.js"></script>
+	</head>
+	<body>
+		<div id="container"/>
+		<script type="text/javascript">
+			var camera, scene, renderer;
+		
+			function init() {
+				// scene size
+				var HEIGHT = 480
+				, WIDTH = 640;
+				
+				// camera properties
+				var FOV = 45
+				, ASPECT = WIDTH/HEIGHT
+				, NEAR = 0.1
+				, FAR = 10000;
+				
+				// create a renderer, camera, and scene
+				renderer = new THREE.WebGLRenderer();
+				renderer.setSize (WIDTH, HEIGHT);
+				camera = new THREE.Camera(FOV, ASPECT, NEAR, FAR);
+				camera.position.z = 100;
+				//camera.position.y = 30;
+				
+				scene = new THREE.Scene();
+				drawSnowMan();
+				drawPlane();
+				
+				
+				// add lighting
+				var light = new THREE.DirectionalLight(0xFFFFFF);
+				
+				light.position.x = 10;
+				light.position.y = 200;
+				light.position.z = 130;
+				
+				scene.addLight(light);
+				
+				// attach the scene to the DOM
+				$("#container").get(0).appendChild(renderer.domElement);
+			}
+			
+			function drawSnowMan() {
+				var topSegment, middleSegment, bottomSegment;
+				var whiteMaterial;
+				
+				whiteMaterial = new THREE.MeshLambertMaterial({
+						color:0xFFFFFF
+				})
+				bottomSegment = new THREE.Mesh(
+					new THREE.Sphere(8, 16, 16), whiteMaterial
+				);
+				middleSegment = new THREE.Mesh(
+					new THREE.Sphere(6, 16, 16), whiteMaterial
+				);
+				middleSegment.translateY(10);
+				topSegment = new THREE.Mesh(
+					new THREE.Sphere(5, 16, 16), whiteMaterial
+				);
+				topSegment.translateY(19);
+				
+				drawArms();
+				drawNose();
+				
+				scene.addChild(topSegment);
+				scene.addChild(middleSegment);
+				scene.addChild(bottomSegment);
+			}
+			
+			function drawArms() {
+				var arm, arm2, armMaterial;
+				
+				armMaterial = new THREE.MeshLambertMaterial({
+						color: 0x8B5A00
+				});
+				
+				arm = new THREE.Mesh(
+					new THREE.Cylinder(20, 0.3, 0.3, 10),
+					armMaterial
+				);
+				arm2 = new THREE.Mesh(
+					new THREE.Cylinder(20, 0.3, 0.3, 10),
+					armMaterial
+				);
+				
+				arm.rotation.x = 30;
+				arm.rotation.y = 10;
+				arm.translateX(8);
+				arm.translateZ(1);
+				arm.translateY(15);
+				
+				arm2.rotation.x = -30;
+				arm2.rotation.y = 10;
+				arm2.translateX(-7);
+				arm2.translateZ(1);
+				arm2.translateY(15);
+				
+				scene.addChild(arm);
+				scene.addChild(arm2);
+			}
+			
+			function drawNose() {
+				var nose, noseMaterial;
+				noseMaterial = new THREE.MeshLambertMaterial({
+						color: 0xFF6103
+				});
+				nose = new THREE.Mesh(
+					new THREE.Cylinder(20, 0.8, 0.01, 3),
+					noseMaterial
+				);
+				
+				nose.rotation.y = 0;
+				nose.translateX(0);
+				nose.translateY(19);
+				nose.translateZ(8);
+				scene.addChild(nose);
+			}
+			
+			function drawPlane() {
+				var plane, planeMaterial;
+				planeMaterial = new THREE.MeshLambertMaterial({
+						color:0x333333,
+						opacity: 0.30
+				});
+				
+				plane = new THREE.Mesh(
+					new THREE.Plane(500,500, 20, 20),
+					planeMaterial
+				);
+				
+				scene.addChild(plane);
+			}
+			
+			function animate() {
+				requestAnimationFrame (animate);
+				render();
+			}
+			
+			function render() {
+				renderer.render(scene, camera);
+			}
+			
+			init();
+			animate();
+		</script>
+		
+	<body>
+</html>

@@ -1,0 +1,1 @@
+coffee -c coffee/*.coffee -o gen-js/

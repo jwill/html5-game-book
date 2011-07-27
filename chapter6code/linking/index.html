@@ -1,0 +1,26 @@
+<html>
+<head></head>
+<body>
+    <script src="js/raphael-min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var paper = Raphael(0, 0, 300, 300);
+        var circle = paper.circle(50, 50, 40);
+        circle.attr({fill:'#F00'});
+        circle.node.onclick = function () {
+            document.location = "http://facebook.com";
+        };
+        circle.node.onmouseover = function () {
+            console.log("over at "+ new Date());
+        };
+        var r = paper.rect(200,100, 40, 40);
+        r.attr("fill", "#00C");
+        r.click(function () {
+            document.location = "http://amazon.com";
+        });
+        
+        var rect = paper.rect(150,200, 80, 80);
+        rect.attr({fill:"#0F0", href:"http://google.com"});
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+	"name":"Copy Me Game",
+	"version":"0.0.1",
+	
+	"description":"A Simon-like 'repeat the pattern' game",	
+	"app" : {
+		"launch": {
+			"local_path": "index.html",
+			"container":"tab"
+		}
+	},
+	"icons": {
+    "16": "icons/icon_16.png",
+    "128": "icons/icon_128.png"		
+  }
+}

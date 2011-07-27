@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="GWTMemoryCards:GWT">
+    <output-path>$PROJECT_DIR$/out/artifacts/GWTMemoryCards_GWT</output-path>
+    <root id="archive" name="GWTMemoryCards_GWT.war">
+      <element id="gwt-compiler-output" facet="GWTMemoryCards/gwt/GWT" />
+      <element id="artifact" artifact-name="GWTMemoryCards:Web exploded" />
+    </root>
+  </artifact>
+</component>
