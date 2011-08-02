@@ -93,10 +93,10 @@ function Game() {
 			// check if it is the computers turn
 			// play sequence - play sounds
 			// wait for player to play sequence
+            // forces a 1 second gap between rounds
 			if (!self.playersTurn) {
 				self.playersTurn = true;
-				self.playSequence();
-				
+				setTimeout(function(){self.playSequence();},1000);
 			} 
 			self.drawSquares();	
 		});
@@ -155,6 +155,7 @@ function Game() {
 		var j = self.currentPosition++;
 		self.audios[j].audio.play();
 		self.audios[j].timeline.play();
+		
 	}
 	
 	self.drawGameText = function() {
