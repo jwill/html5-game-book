@@ -25,7 +25,7 @@ function Game() {
 		self.setupAudioChannels();
 				
 		self.canvas.addEventListener("click", self.handleMouseClick, false);
-		tapjs.play();
+		
 		self.startGame();
 	}
 	
@@ -93,10 +93,10 @@ function Game() {
 			// check if it is the computers turn
 			// play sequence - play sounds
 			// wait for player to play sequence
+            // forces a 1 second gap between rounds
 			if (!self.playersTurn) {
 				self.playersTurn = true;
-				self.playSequence();
-				
+				setTimeout(function(){self.playSequence();},1000);
 			} 
 			self.drawSquares();	
 		});
@@ -155,6 +155,7 @@ function Game() {
 		var j = self.currentPosition++;
 		self.audios[j].audio.play();
 		self.audios[j].timeline.play();
+		
 	}
 	
 	self.drawGameText = function() {
@@ -259,14 +260,6 @@ function Game() {
 				self.timelines.green.play();
 				self.timelines.blue.play();
 				self.timelines.yellow.play();
-				// try to save high score
-				tapjsHighScores.save(self.currentRound, "Memory Master", "yes");
-				//tapjsSocial.fbCheck(self.setFacebookStatus);
-				//if (isFacebook) {
-					// Post message to wall
-					tapjsSocial.fbWallPost("Test message - James had a high score in CopyMe.");
-				//}
-				
 				self.currentRound = 1;
 				self.position = 0;
 				self.playerSequence = new Array();
