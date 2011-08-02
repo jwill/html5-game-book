@@ -63,9 +63,9 @@ TTT.game.getScript("MiniMax.js", function() {
 			});
 			
 			TTT.game.addListener("winner", function(args) { 
-					if (args[0] == "X")
+					if (args[0] == "X") {
 						TTT.message.color = "0000FF"
-					else if (args[0] == "O")
+					} else if (args[0] == "O")
 						TTT.message.color = "FF0000"
 					TTT.message.setText(args[0] + " wins!");
 					TTT.isGameOver = true;

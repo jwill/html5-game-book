@@ -11,21 +11,30 @@ TTT.Cell = Class.create(Rectangle, {
     toggleState: function() {
       x = this.pos.x;
       y = this.pos.y;
-    	if (TTT.isHumanTurn == true) {
-        this.color = TTT.colors.blue;
-      	TTT.gameBoard[x][y] = "X";
+      if (TTT.isHumanTurn == true) {
+        
+      	// check for value already in square
+        temp = TTT.gameBoard[x][y];
+        if (temp == "") {
+            this.color = TTT.colors.blue;
+            TTT.gameBoard[x][y] = "X";
+            this.changePlayer()
+        } else {
+          alert("Choose another square.");
+        }
       } else {
         this.color = TTT.colors.red;
         TTT.gameBoard[x][y] = "O";
+        this.changePlayer();
       }
+    },
+    changePlayer: function() {
       TTT.checkForWin(TTT.gameBoard);
       TTT.isHumanTurn = !TTT.isHumanTurn;
       if (TTT.isHumanTurn == false)
-      	TTT.game.emit("playerTurnOver");
-
+          TTT.game.emit("playerTurnOver");    
     }
 });
-
 
 TTT.initCells = function (values) {
     var x, y;

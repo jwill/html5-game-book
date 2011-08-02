@@ -1,6 +1,6 @@
 var MiniMax = Class.create({
 	initialize: function() {
-		this.depthLimit = 200;
+		this.depthLimit = 400;
 		this.currentDepth = 0;
 	},
 	miniMax: function(board, currentPlayer) {
