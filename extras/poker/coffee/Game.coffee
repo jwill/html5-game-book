@@ -20,18 +20,29 @@ class PokerGame
         @playerTokens = 500
         @maxTokens = 5
         @currentRoundToken = 1
-        @width = 720
-        @height = 805
+        
         @init()
+        self = this
+        $(window).resize(() ->
+            window.paper.clear() if window.paper isnt undefined
+            self.init()
+            # redraw hand
+        );
+
         
     init: () ->
-        window.paper = Raphael($("#gameboard")[0], @width, @height)
+        
+        @width = window.innerWidth - 25
+        @height = window.innerHeight - 25
+        window.paper = Raphael($("#gameboard")[0], @width, @height) if window.paper is undefined
         @gameBoard = paper.rect(0, 0, @width, @height, 15)
         @gameBoard.attr({
             fill:'#090',          
             stroke:'#000'  
         })
         @gameBoard.toBack()
+    
+    
     
     incrementBet: () ->
         @currentRoundToken++ if @currenRoundToken < @maxTokens
@@ -42,10 +53,13 @@ class PokerGame
     dealHand: (hand) ->
         
     evaluateHand: (hand) ->
-        
+    
+    dealHand: (hand) ->
+    
+    drawPayouts: () ->
     
     checkRoyalFlush: (hand) ->
-        
+    
     # royal, straight, and regular flush
     checkFlush: (hand) ->
         
@@ -62,4 +76,3 @@ class PokerGame
     checkPair: (hand) ->
    
 window.PokerGame = PokerGame
-    

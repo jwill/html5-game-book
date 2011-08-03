@@ -1,5 +1,5 @@
 class Hand
-    constructor: () ->
+    constructor: (@deck) ->
         cards = [:]
         
     

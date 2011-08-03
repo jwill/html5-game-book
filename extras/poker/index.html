@@ -6,7 +6,10 @@
         <script src="js/Card.js" type="text/javascript"></script>
         <script src="js/Deck.js" type="text/javascript"></script>
         <script type="text/coffeescript" src="coffee/Game.coffee" ></script>
-        <script type="text/javascript" src="js/jquery-1.4.3.js"></script>
+        <script src="js/jquery-1.4.3.js" type="text/javascript"></script>
+        <script type="text/coffeescript">
+            window.game = new PokerGame()
+        </script>
     </head>
     <body>
         <div id="gameboard"/>
