@@ -20,11 +20,14 @@ class Hand
             @cards.push(card)
         else
             num = @findCardToReplace()
-            console.log num
+            @cards[num].flipCard()
             if num isnt null
                 card.state = true;
                 card.positionInHand = num
+                @cards[num].trashCard()
                 @cards[num] = card
+                @cards[num].drawCard()
+                @cards[num].flipCard()
         
     findCardToReplace: () ->
         for i in [0..5]
@@ -41,6 +44,9 @@ class Hand
             return cards
     
     drawCards: () ->
+        for i in [0...5]
+            @cards[i].drawCard()
+            @cards[i].flipCard() if @cards[i].frontShown isnt true
         
     
 window.Hand = Hand

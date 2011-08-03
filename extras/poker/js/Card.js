@@ -36,15 +36,22 @@ function Card(ordinal, suit) {
         var t = paper.text(self.xPos+130, self.yPos+50, self.ord+"-"+self.suit)
     }
     
+    self.findXPos = function() {
+        self.xPos = 10 + (self.positionInHand *169)  
+    }
+    
     self.findYPos = function() {
         // InnerHeight - the height of the card
         var h = window.paper.height - 245 - 10 ;
         self.yPos = h;
     }
     
-    self.drawCard = function() {        
+    self.drawCard = function() { 
+        self.findXPos()
         self.findYPos()
-        self.cardBack = paper.image( self.cardBackPath, self.xPos, self.yPos, 169, 245)
+        if (self.cardBack == undefined)
+            self.cardBack = paper.image( self.cardBackPath, self.xPos, self.yPos, 169, 245)
+        if (self.cardFront == undefined)
         self.cardFront = paper.image(self.cardFrontPath, self.xPos, self.yPos, 169, 245)
         self.cardFront.attr("opacity", 0.0)
         
@@ -54,7 +61,13 @@ function Card(ordinal, suit) {
             
             console.log(self.toString() + " - " + self.state);
             // TODO show some sort of transition to show held cards
-        })
+        });
+       
+    }
+    
+    self.trashCard = function() {
+        self.cardBack.remove();
+        self.cardFront.remove();
     }
     
     self.flipCard = function(frontShown) {        

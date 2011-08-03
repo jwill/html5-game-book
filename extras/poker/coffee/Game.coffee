@@ -29,6 +29,7 @@ class PokerGame
             self.init()
             # redraw hand
         )
+        
 
         
     init: () ->
@@ -42,6 +43,16 @@ class PokerGame
             stroke:'#000'  
         })
         @gameBoard.toBack()
+        
+        #buttons and label
+        @betButton = new Button({x:35, y:30, fontSize:48, text:"Bet"})
+        @betButton.setOnClick ()->
+            alert("clicked")
+        
+        attrList = {fill:"#FFF", stroke: 2};
+        gameTitle = paper.print(150,30, "Video Poker", paper.getFont("Droid Sans", "bold"), 48)
+        gameTitle.attr(attrList)
+
     
     
     
