@@ -1,5 +1,46 @@
+# @author jwill
+#
+# After deal
+# States for cards:
+# true  --- held
+# false --- draw card
+#
+
 class Hand
-    constructor: (@deck) ->
-        cards = [:]
+    constructor: () ->
+        @cards = []
+        @pos = 0
+    
+    toggleHeldCard: (position) ->
+        
+    addToHand: (card) ->
+        if @cards.length isnt 5
+            card.positionInHand = @pos++
+            card.state = false;
+            @cards.push(card)
+        else
+            num = @findCardToReplace()
+            console.log num
+            if num isnt null
+                card.state = true;
+                card.positionInHand = num
+                @cards[num] = card
+        
+    findCardToReplace: () ->
+        for i in [0..5]
+            return i if @cards[i].state is false
+        return null
+    
+    cardsNeeded: () ->
+        if @cards.length isnt 5
+            return 5
+        else
+            cards = 0
+            for i in [0...5]
+                cards++ if @cards[i].state is false
+            return cards
+    
+    drawCards: () ->
         
     
+window.Hand = Hand

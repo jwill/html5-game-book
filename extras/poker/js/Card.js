@@ -36,18 +36,24 @@ function Card(ordinal, suit) {
         var t = paper.text(self.xPos+130, self.yPos+50, self.ord+"-"+self.suit)
     }
     
+    self.findYPos = function() {
+        // InnerHeight - the height of the card
+        var h = window.paper.height - 245 - 10 ;
+        self.yPos = h;
+    }
+    
     self.drawCard = function() {        
+        self.findYPos()
         self.cardBack = paper.image( self.cardBackPath, self.xPos, self.yPos, 169, 245)
         self.cardFront = paper.image(self.cardFrontPath, self.xPos, self.yPos, 169, 245)
         self.cardFront.attr("opacity", 0.0)
+        
+         self.cardFront.click(function() {
+            // toggle state for card
+            self.state = !self.state;
             
-        
-        
-        self.cardBack.click(function() {            
-            self.flipCard();
-        });
-        self.cardFront.click(function() {
-            self.flipCard();
+            console.log(self.toString() + " - " + self.state);
+            // TODO show some sort of transition to show held cards
         })
     }
     
@@ -60,14 +66,11 @@ function Card(ordinal, suit) {
         if (self.frontShown) {
             self.cardBack.animate({opacity:0.0}, 1000)
             self.cardFront.animate({opacity:1}, 1000)
-            game.selectedCards.add(self);
         } else {
             self.cardFront.animate({opacity:0.0}, 1000)
             self.cardBack.animate({opacity:1}, 1000)
-            game.selectedCards.remove(self);
         }        
         
-        console.log(game.selectedCards);
     }
     
     self.discard = function() {

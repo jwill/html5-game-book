@@ -6,12 +6,12 @@
 class PokerGame
     constructor: () ->
         @basePayouts = [
-            JacksOrBetter: 1,
-            TwoPair: 2,
-            ThreeKind: 3,
-            Straight: 4,
-            Flush: 6,
-            FullHouse: 9,
+            JacksOrBetter: 1
+            TwoPair: 2
+            ThreeKind: 3
+            Straight: 4
+            Flush: 6
+            FullHouse: 9
             FourKind: 25
             StraightFlush: 50
             RoyalFlush: 250
@@ -20,6 +20,7 @@ class PokerGame
         @playerTokens = 500
         @maxTokens = 5
         @currentRoundToken = 1
+        @hand = new Hand()
         
         @init()
         self = this
@@ -27,7 +28,7 @@ class PokerGame
             window.paper.clear() if window.paper isnt undefined
             self.init()
             # redraw hand
-        );
+        )
 
         
     init: () ->
@@ -54,7 +55,10 @@ class PokerGame
         
     evaluateHand: (hand) ->
     
-    dealHand: (hand) ->
+    dealHand: () ->
+        numCards = @hand.cardsNeeded()
+        for i in [0...numCards]
+            @hand.addToHand(@deck.dealCard())
     
     drawPayouts: () ->
     
