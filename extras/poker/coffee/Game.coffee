@@ -48,20 +48,29 @@ class PokerGame
         @betButton = new Button({x:35, y:30, fontSize:48, text:"Bet"})
         @betButton.setOnClick ()->
             alert("clicked")
+            
+        @betButton.translate(@width-200, @height-200)
         
         attrList = {fill:"#FFF", stroke: 2};
         gameTitle = paper.print(150,30, "Video Poker", paper.getFont("Droid Sans", "bold"), 48)
         gameTitle.attr(attrList)
-
+        
+        @betLabel = new Label()
+        @betLabel.setText("Bet: "+@currentRoundToken)
+        @betLabel.translate(@width-200, @height- 225)
     
     
     
     incrementBet: () ->
-        @currentRoundToken++ if @currenRoundToken < @maxTokens
+        @currentRoundToken++ 
+        if @currentRoundToken > @maxTokens
+            @currentRoundToken = 1
+        @betLabel.setText("Bet: "+@currentRoundToken)
         
     decrementBet: () ->
         @currentRoundToken-- if @currentRoundToken > 1
-        
+        @betLabel.setText("Bet: "+@currentRoundToken)
+
     dealHand: (hand) ->
         
     evaluateHand: (hand) ->
