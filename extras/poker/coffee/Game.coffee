@@ -47,7 +47,7 @@ class PokerGame
         #buttons and label
         @betButton = new Button({x:35, y:30, fontSize:48, text:"Bet"})
         @betButton.setOnClick ()->
-            alert("clicked")
+            window.game.incrementBet()
             
         @betButton.translate(@width-200, @height-200)
         
