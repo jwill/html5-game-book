@@ -20,14 +20,11 @@ class Hand
             @cards.push(card)
         else
             num = @findCardToReplace()
-            @cards[num].flipCard()
             if num isnt null
                 card.state = true;
                 card.positionInHand = num
                 @cards[num].trashCard()
                 @cards[num] = card
-                @cards[num].drawCard()
-                @cards[num].flipCard()
         
     findCardToReplace: () ->
         for i in [0..5]
@@ -46,7 +43,14 @@ class Hand
     drawCards: () ->
         for i in [0...5]
             @cards[i].drawCard()
+            
+    flipCards: () ->
+        for i in [0...5]
             @cards[i].flipCard() if @cards[i].frontShown isnt true
         
-    
+    clearCards: () ->
+        for i in [0...5]
+            @cards[i].trashCard()
+        @cards = []
+        @pos = 0
 window.Hand = Hand

@@ -54,7 +54,7 @@ function Card(ordinal, suit) {
         if (self.cardFront == undefined)
         self.cardFront = paper.image(self.cardFrontPath, self.xPos, self.yPos, 169, 245)
         self.cardFront.attr("opacity", 0.0)
-        
+        self.flipCard();
          self.cardFront.click(function() {
             // toggle state for card
             self.state = !self.state;
