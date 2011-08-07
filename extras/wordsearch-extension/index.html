@@ -4,30 +4,33 @@
         <script src="js/zepto.min.js" type="text/javascript"></script>
         <script src="js/raphael-min.js" type="text/javascript"></script>
         <script src="js/coffee-script.js" type="text/javascript"></script>
-        <!-- <script src="js/json_sans_eval.js" type="text/javascript"></script>
-        -->
         <script src="js/Droid_Sans_400.font.js" type="text/javascript"></script>
-    <script type="text/coffeescript" src="coffee/Letter.coffee" ></script>
-    <script type="text/coffeescript" src="coffee/Line.coffee" ></script>
-    <script type="text/coffeescript" src="coffee/Set.coffee"></script>
-    <script type="text/coffeescript" src="coffee/Position.coffee"></script>
-    <script type="text/coffeescript" src="coffee/WordSearchPuzzle.coffee"></script>
-    <script type="text/coffeescript" src="coffee/WordSearchGame.coffee"></script>
+        <script type="text/coffeescript" src="coffee/Letter.coffee" ></script>
+        <script type="text/coffeescript" src="coffee/Line.coffee" ></script>
+        <script type="text/coffeescript" src="coffee/Set.coffee"></script>
+        <script type="text/coffeescript" src="coffee/Position.coffee"></script>
+        <script type="text/coffeescript" src="coffee/WordSearchPuzzle.coffee"></script>
+        <script type="text/coffeescript" src="coffee/WordSearchGame.coffee"></script>
     </head>
-    <body>
-        <div id="gameboard" />
+    <body style="background-color: #000000;">
         <script type="text/coffeescript">
-          game = null
-          #  game.gameboard.drawBoard()
-          puzzles = null
-          $.getJSON("puzzles.json",(data) -> 
-            console.log "here"
-            puzzles = data
-            puzzle = new WordSearchPuzzle(puzzles[0])
-            window.game = new WordSearchGame(puzzle)
+          window.game = null
+          $.getJSON "puzzles.json",(data) -> 
+            window.puzzles = data
+            window.game = new WordSearchGame(puzzles)
             window.game.drawGrid()
-          )
           
+          window.previousPuzzle = () ->
+          	prevPuzzle = window.game.currentPuzzle - 1
+          	if window.puzzles[prevPuzzle] isnt undefined
+          		window.game.setPuzzle(prevPuzzle)
+          		window.game.drawGrid()
+          
+          window.nextPuzzle = () ->
+          	nextPuzzle = window.game.currentPuzzle + 1
+          	if window.puzzles[nextPuzzle] isnt undefined
+          		window.game.setPuzzle(nextPuzzle)
+          		window.game.drawGrid()
         </script>
         
     </body>

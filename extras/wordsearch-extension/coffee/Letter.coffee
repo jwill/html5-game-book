@@ -1,5 +1,5 @@
 class Letter
-	sideLength = 50
+	sideLength = 40
 	offset = 0
 	constructor: (@letter) ->
 		

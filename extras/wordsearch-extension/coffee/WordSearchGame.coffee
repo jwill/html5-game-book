@@ -2,29 +2,43 @@ class Game
   constructor: (@name) ->
 
 class WordSearchGame extends Game
-		constructor: (@puzzle)->
+		constructor: (@rawPuzzles)->
 			@name = "Word Search"
 			@gridSize = 10
 			@isSelecting = false
-			@letterGrid = [[],[],[],[],[],[],[],[],[],[]]
 			@tempWord = new LetterSet()
 			@userData
 			@puzzle
 			@words
+			@currentPuzzle = 0
 			@wordLines = []
 			# draw game board
-			@paper = Raphael(0,0, 800, 800)
-			@bg = @paper.image("images/bg.png", 0, 0, 800, 800)
-			@title = @paper.text(200, 25, "#{@puzzle.title}");
-			@title.attr {'font-size':36, 'fill': 'white'}
-			@wordListTitle = @paper.text(600, 60, "WordList");
-			@wordListTitle.attr {'font-size':20, 'fill': 'white'}
-			@populate()
+			@paper = Raphael(0,0, 800, 600)
 			
+			@parsePuzzles()
+			@setPuzzle(0)
+		
+		parsePuzzles: () ->
+			@puzzles = []
+			for i in [0...@rawPuzzles.length]
+				p = new WordSearchPuzzle(@rawPuzzles[i])
+				@puzzles.push(p)
+		
+		setPuzzle: (i) ->
+			if @puzzles[i] isnt undefined
+				@puzzle = @puzzles[i] 
+				@paper.clear()
+				@letterGrid = [[],[],[],[],[],[],[],[],[],[]]
+				@title = @paper.print(25, 25, "#{@puzzle.title}", @paper.getFont("Droid Sans", "bold"), 36);
+				@title.attr {'fill': 'white'}
+				@wordListTitle = @paper.text(600, 60, "Word List");
+				@wordListTitle.attr {'font-size':24, 'fill': 'white'}				
+				@populate()
+				@currentPuzzle = i
+				
 		populate: ->    
 			upperCaseGrid = @puzzle.grid.toUpperCase()
 			l = 0
-			console.log("here")
 			@createWordList()
 			for j in [0...10]
 				for k in [0...10]
@@ -34,12 +48,15 @@ class WordSearchGame extends Game
 					#console.log letter
 					@letterGrid[j].push(letter)
 					l++
+			return
+			
 		
 		drawGrid: ->
 			for j in [0...@gridSize]
 				for k in [0...@gridSize]
 					#console.log "Drawing at position:#{@letterGrid[j][k].getPosition()}"
 					@letterGrid[j][k].draw()
+			return
 		
 		createWordList: ->
 			# TODO use relative positions instead of absolute
@@ -47,7 +64,7 @@ class WordSearchGame extends Game
 			@words = []
 			i = 0
 			for word in @puzzle.words
-				wordText = @paper.text(600,85+(i*20), word)
+				wordText = @paper.text(600,90+(i*20), word)
 				wordText.attr {'font-size':18, 'fill': 'white'}
 				@words.push {text:word.toUpperCase(), svgObject:wordText}
 				i++
@@ -57,7 +74,7 @@ class WordSearchGame extends Game
 				if obj.text.toString() == word
 					#found the word
 					#change color to gray
-					obj.svgObject.attr {fill:'gray'}
+					obj.svgObject.attr {fill:'black'}
 					#draw line
 					@drawLine()
 					break
