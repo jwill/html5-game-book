@@ -13,10 +13,22 @@ class WordSearchGame extends Game
 			@currentPuzzle = 0
 			@wordLines = []
 			# draw game board
-			@paper = Raphael(0,0, 800, 600)
-			
+			@paper = Raphael(0,0, 700, 575)
+			window.paper = @paper
 			@parsePuzzles()
 			@setPuzzle(0)
+			
+		
+		drawButtons: () ->
+			@prevButton = new Button({x:15, y:20, fontSize:24, text:"Previous", dimensions:{ w:125, h:35} })
+			@prevButton.translate(550, 455)
+			@nextButton = new Button({x:35, y:20, fontSize:24, text:"Next", dimensions:{ w:125, h:35} })
+			@nextButton.translate(550, 500)
+			
+			@nextButton.setOnClick ()->
+				window.nextPuzzle()
+			@prevButton.setOnClick () ->
+				window.previousPuzzle()
 		
 		parsePuzzles: () ->
 			@puzzles = []
@@ -35,6 +47,7 @@ class WordSearchGame extends Game
 				@wordListTitle.attr {'font-size':24, 'fill': 'white'}				
 				@populate()
 				@currentPuzzle = i
+				@drawButtons()
 				
 		populate: ->    
 			upperCaseGrid = @puzzle.grid.toUpperCase()

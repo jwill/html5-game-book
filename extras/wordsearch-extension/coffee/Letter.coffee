@@ -4,21 +4,19 @@ class Letter
 	constructor: (@letter) ->
 		
 	draw: ->
-		@rect = game.paper.rect @position.getX(), @position.getY(), sideLength, sideLength
+		@rect = paper.rect @position.getX(), @position.getY(), sideLength, sideLength
 		@rect.attr {'fill':'black'}
 		self = this # local var to avoid 'this' collisions
 		# TODO: set rectangle attr
 		x = @position.getX()+15
 		y = @position.getY()+25
-		@text = game.paper.print x, y, @letter.toUpperCase(), game.paper.getFont("Droid Sans", "bold"), 28
+		@text = paper.print x, y, @letter.toUpperCase(), paper.getFont("Droid Sans", "bold"), 28
 		@text.attr {'fill':'white'}
 	 # console.log @letter
 		mouseOver = (event) ->
 			state = game.isSelecting
 			if state is yes
 				self.text.attr {fill: 'red'}
-				console.log game.tempWord
-				console.log self
 				if self instanceof Letter
 					game.tempWord.push self
 			else 
