@@ -16,15 +16,17 @@ class Letter
 		mouseOver = (event) ->
 			state = game.isSelecting
 			if state is yes
-				this.attr {fill: 'red'}
+				self.text.attr {fill: 'red'}
 				console.log game.tempWord
-				game.tempWord.push self
+				console.log self
+				if self instanceof Letter
+					game.tempWord.push self
 			else 
-				this.attr {fill: 'blue'}
+				self.text.attr {fill: 'blue'}
 		mouseOut = (event) ->
 			# shouldn't transition if mousedown
 			if game.isSelecting is false
-				this.attr {fill: 'black'}
+				self.text.attr {fill: 'white'}
 		mouseDown = (event) ->
 			#start tracking position 
 			state = game.isSelecting
@@ -33,22 +35,21 @@ class Letter
 				game.tempWord = new LetterSet()
 				game.isSelecting = yes 
 				game.tempWord.push self   
-				this.attr {fill: "red"}
+				self.text.attr {fill: "red"}
 			else 
 				
 				game.isSelecting = no
 				game.findWord()
 				game.clearStates()
 				# TODO check word here
-		mouseUp = (event) ->
-			this.attr {fill: 'black'}
 		
 		@rect.mouseover(mouseOver)
 		@rect.mouseout(mouseOut)
-		#@text.mousedown(mouseDown)
 		@rect.mousedown(mouseDown)
-		#@text.mouseup(mouseUp)
-		@rect.mouseup(mouseUp)
+		
+		@text.mouseover(mouseOver)
+		@text.mouseout(mouseOut)
+		@text.mousedown(mouseDown)
 		
 	
 	setPosition: (@position) ->
@@ -63,6 +64,6 @@ class Letter
 		if letter2 instanceof Letter 
 			if @position is letter2.position and @letter is letter2.letter
 					return true
-    return false
+    	return false
 
 window.Letter = Letter

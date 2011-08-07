@@ -71,7 +71,9 @@ class WordSearchGame extends Game
 		findWord: ->
 			word = @tempWord.getLetters()
 			for obj in @words
-				if obj.text.toString() == word
+				# remove spaces
+				w = obj.text.toString().replace(' ','')
+				if w == word
 					#found the word
 					#change color to gray
 					obj.svgObject.attr {fill:'black'}
@@ -84,7 +86,7 @@ class WordSearchGame extends Game
 			for j in [0...@gridSize]
 				for k in [0...@gridSize]
 					#console.log "Drawing at position:#{@letterGrid[j][k].getPosition()}"
-					@letterGrid[j][k].rect.attr {fill:'black'}  
+					@letterGrid[j][k].text.attr {fill:'white'}  
 			return
 			
 		drawLine: ->
