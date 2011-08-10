@@ -2,14 +2,15 @@
     Defines the Card object.
     @author jwill
 */
-function Card(ordinal, suit) {
+function Card(ordinal, val, suit) {
     if ( !(this instanceof arguments.callee) ) {
         return new arguments.callee(arguments); 
     }
     
     var meta;
     var ord;
-    var suit;    
+    var suit; 
+    var val;
     var xPos;
     var yPos;
     var cardFront, cardBack;
@@ -26,6 +27,7 @@ function Card(ordinal, suit) {
     self.init = function() {        
         self.ord = ordinal;
         self.suit = suit;
+        self.val = val;
         self.cardBackPath = "images/90dpi/back.png";
         self.cardFrontPath = "images/90dpi/"+self.ord+"_"+self.suit+".png";       
         self.meta = new Object();

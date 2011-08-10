@@ -18,13 +18,14 @@ function Deck(numDecks) {
     self.initCards = function() {
         // Initialize the cards 
         var ordinals = ['1','2','3','4','5','6', '7', '8', '9', '10', 'jack', 'queen', 'king'];
+        var vals = [1,2,3,4,5,6,7,8,9,10,11,12,13]
         var suits = ['club', 'spade', 'heart','diamond'];
         
         // Populate card array
         for (var k = 0; k<numDecks; k++) {
             for (var j = 0; j < suits.length; j++) {
                 for (var i = 0; i < ordinals.length; i++) {
-                    self.cards[ (i + (j*13) + (k*52)) ] = new Card(ordinals[i],suits[j]); 
+                    self.cards[ (i + (j*13) + (k*52)) ] = new Card(ordinals[i],vals[i], suits[j]); 
                 }
             }
         }
