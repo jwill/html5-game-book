@@ -40,7 +40,7 @@ function Card(ordinal, val, suit) {
     
     self.findXPos = function() {
     		// could do variable spacing here
-    		self.xPos = 10 + (self.positionInHand *169)  
+    		self.xPos = 10 + (self.positionInHand *189)  
     }
     
     self.findYPos = function() {

@@ -6,12 +6,17 @@ class PayoutPane
         @attrList2 = {"text-anchor": "end", "font-size":24 }
         @col1X = 40
         @yCenter = 0
+        
+    calcX: () ->
+        return game.width - 380
+        
     draw: () ->
         @remove()
-        @rect = paper.rect(@col1X - 40, @yCenter + 75, 400, 300, 10)
+        @col1X = @calcX()
+        @rect = paper.rect(@col1X - 40, @yCenter + 75, 380, 300, 10)
         @payoutCol1 = paper.text @col1X, @yCenter + 225, @payoutLabels
         @payoutCol1.attr(@attrList)
-        values = _.values game.evaluator.basePayouts
+        values = _.values new Evaluator().basePayouts
         # apply muliplier for bet amount
         values = (num*game.currentRoundBet for num in values)
         values.reverse()

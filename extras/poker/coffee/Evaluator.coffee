@@ -35,7 +35,7 @@ class Evaluator
         flush = @findLength(sorted, 5)
         if flush.length isnt 0
         	royal = @checkRoyalFlush(hand)
-        	straighFlush = @checkStraightFlush(hand)
+        	straightFlush = @checkStraightFlush(hand)
         	return royal if royal
         	return straightFlush if straightFlush
         	return "Flush"
@@ -77,7 +77,7 @@ class Evaluator
     	return card.suit
     checkJacksOrBetter: (hand) ->
     	pair = @checkPair(hand)
-    	return "JacksOrBetter" if pair[0] is 1 or pair[0] > 10
+    	return "JacksOrBetter" if (Number(pair[0]) is 1) or (Number(pair[0]) > 10)
     	
     checkPair: (hand) ->
     	sorted = _.groupBy hand.cards, @ordinalHandler
