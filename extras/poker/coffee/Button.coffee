@@ -1,6 +1,8 @@
 class Button
     constructor: (options) ->
-        @rect = paper.rect(0, 0, 150, 50, 10)
+        if options.dims isnt undefined
+            @rect = paper.rect(0,0, options.dims.x, options.dims.y, 10)
+        else @rect = paper.rect(0, 0, 150, 50, 10)
         if (options.color isnt undefined)
             @rect.attr({
                 fill:options.color
@@ -22,5 +24,9 @@ class Button
     setOnClick: (func) ->
         @rect.click(func)
         @text.click(func)
+        
+    remove: () ->
+        @rect.remove()
+        @text.remove()
             
 window.Button = Button

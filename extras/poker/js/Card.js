@@ -48,6 +48,20 @@ function Card(ordinal, val, suit) {
         self.yPos = h;
     }
     
+    self.drawHoldButton = function() {
+        var x = self.xPos + 55
+        var y = self.yPos - 50
+        if (self.holdButton) self.holdButton.remove();
+        if (self.state) {
+            self.holdButton = new Button({x:5, y:20, fontSize:20, text:"Held", color:'red', dims:{x:55, y:35}})
+        } else {
+            self.holdButton = new Button({x:5, y:20, fontSize:20, text:"Hold", color:'blue', dims:{x:55, y:35}})
+        }
+            
+        self.holdButton.translate(x, y)
+    }
+    
+    
     self.drawCard = function() { 
         self.findXPos()
         self.findYPos()
@@ -60,11 +74,9 @@ function Card(ordinal, val, suit) {
          self.cardFront.click(function() {
             // toggle state for card
             self.state = !self.state;
-            
-            console.log(self.toString() + " - " + self.state);
-            // TODO show some sort of transition to show held cards
+            self.drawHoldButton();
         });
-       
+       self.drawHoldButton();
     }
     
     self.trashCard = function() {

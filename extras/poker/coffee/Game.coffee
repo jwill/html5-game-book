@@ -5,23 +5,13 @@
 
 class PokerGame
     constructor: () ->
-        @basePayouts = [
-            JacksOrBetter: 1
-            TwoPair: 2
-            ThreeKind: 3
-            Straight: 4
-            Flush: 6
-            FullHouse: 9
-            FourKind: 25
-            StraightFlush: 50
-            RoyalFlush: 250
-        ]
-        @deck = new Deck(1)
+        @deck = new Deck(3)
         @playerTokens = 500
         @maxTokens = 5
         @roundState = 0
-        @currentRoundToken = 1
+        @currentRoundBet = 1
         @hand = new Hand()
+        @evaluator = new Evaluator()
         
         @init()
         self = this
@@ -29,6 +19,7 @@ class PokerGame
             window.paper.clear() if window.paper isnt undefined
             self.init()
             # redraw hand
+            hand.drawCards()
         )
         
 
@@ -57,7 +48,7 @@ class PokerGame
         gameTitle.attr(attrList)
         
         @betLabel = new Label()
-        @betLabel.setText("Bet: "+@currentRoundToken)
+        @betLabel.setText("Bet: "+@currentRoundBet)
         @betLabel.translate(@width-180, @height- 230)
     
         @tokensLabel = new Label()
@@ -72,29 +63,31 @@ class PokerGame
                 game.roundState = 0;
             #first draw
             if game.roundState is 0
-                game.playerTokens -= window.game.currentRoundToken 
+                game.playerTokens -= window.game.currentRoundBet 
                 game.tokensLabel.setText "Tokens: "+game.playerTokens
             game.dealHand()
             game.hand.drawCards()
             game.hand.flipCards()
-            game.evaluateHand()
+            winnings = game.evaluator.evaluate(game.hand)
+            console.log(winnings + " -" + game.roundState)
+            if game.roundState is 1 and winnings > 0
+                game.playerTokens += (winnings * game.currentRoundBet)
+                game.tokensLabel.setText "Tokens: "+game.playerTokens
             game.roundState++
             
         @dealButton.translate(@width-200, @height-75)
     
     incrementBet: () ->
-        @currentRoundToken++ 
-        if @currentRoundToken > @maxTokens
-            @currentRoundToken = 1
-        @betLabel.setText("Bet: "+@currentRoundToken)
+        if @roundState isnt 1
+            @currentRoundBet++ 
+            if @currentRoundBet > @maxTokens
+                @currentRoundBet = 1
+            @betLabel.setText("Bet: "+@currentRoundBet)
         
     decrementBet: () ->
-        @currentRoundToken-- if @currentRoundToken > 1
-        @betLabel.setText("Bet: "+@currentRoundToken)
+        @currentRoundBet-- if @currentRoundBet > 1
+        @betLabel.setText("Bet: "+@currentRoundBet)
         
-    evaluateHand: () ->
-        alert("evaluate")
-       
     
     dealHand: () ->
         numCards = @hand.cardsNeeded()
@@ -103,21 +96,5 @@ class PokerGame
     
     drawPayouts: () ->
     
-    checkRoyalFlush: (hand) ->
     
-    # royal, straight, and regular flush
-    checkFlush: (hand) ->
-        
-    checkStraight: (hand) ->
-    
-    checkFourKind: (hand) ->
-    
-    checkFullHouse: (hand) ->
-        
-    checkThreeKind: (hand) ->
-        
-    checkTwoPair: (hand) ->
-        
-    checkPair: (hand) ->
-   
 window.PokerGame = PokerGame

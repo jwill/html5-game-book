@@ -34,8 +34,8 @@ class Evaluator
         sorted = _.groupBy hand.cards, @suitHandler
         flush = @findLength(sorted, 5)
         if flush.length isnt 0
-        	royal = checkRoyalFlush(hand)
-        	straighFlush = checkStraightFlush(hand)
+        	royal = @checkRoyalFlush(hand)
+        	straighFlush = @checkStraightFlush(hand)
         	return royal if royal
         	return straightFlush if straightFlush
         	return "Flush"
