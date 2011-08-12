@@ -68,7 +68,7 @@ class PokerGame
         
         @message = new Label()
         @message.setText "Make your bet and click Deal."
-        @message.translate 200,350
+        @message.translate 200,300
         
         @dealButton = new Button({x:25, y:30, fontSize:48, text:"Deal"})
         @dealButton.setOnClick ()->
@@ -95,14 +95,14 @@ class PokerGame
         
         @dealButton.translate(@width-200, @height-75)
         t = paper.text 0, 0, "Like this game? Want to make games like it?"
-        t.attr({translation: "300,150", fill: 'yellow', "font-size":24})
+        t.attr({translation: "300,100", fill: 'yellow', "font-size":24})
         
         t = paper.text 0, 0, "Follow me on Twitter"
-        t.attr({"href": "http://twitter.com/ecspike", translation: "300,250", fill: 'navy', "font-size":24})
+        t.attr({"href": "http://twitter.com/ecspike", translation: "300,200", fill: 'navy', "font-size":24})
         t = paper.text 0, 0, "Buy my book:\nLearning HTML5 Game Programming" 
-        t.attr({"href": "http://amzn.to/HTML5-Game-Book", fill: 'navy', translation: "300,200", "font-size":24})
+        t.attr({"href": "http://amzn.to/HTML5-Game-Book", fill: 'navy', translation: "300,150", "font-size":24})
         t = paper.text 0, 0, "Circle me on Google+" 
-        t.attr({"href": "http://profiles.google.com/James.L.Williams", fill: 'navy', translation: "300,275", "font-size":24})
+        t.attr({"href": "http://profiles.google.com/James.L.Williams", fill: 'navy', translation: "300,225", "font-size":24})
     
     incrementBet: () ->
         if @roundState isnt 1
