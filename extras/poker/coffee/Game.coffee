@@ -34,6 +34,7 @@ class PokerGame
             stroke:'#000'  
         })
         @gameBoard.toBack()
+        @drawPayouts()
         
         #buttons and label
         @betButton = new Button({x:35, y:30, fontSize:48, text:"Bet"})
@@ -43,8 +44,8 @@ class PokerGame
         @betButton.translate(@width-200, @height-150)
         
         attrList = {fill:"#FFF", stroke: 2};
-        gameTitle = paper.print(150,30, "Video Poker", paper.getFont("Droid Sans", "bold"), 48)
-        gameTitle.attr(attrList)
+        gameTitle = new Label({x:150, y:30, text: "Video Poker", fontSize:48 , attrList:attrList})
+        
         
         @betLabel = new Label()
         @betLabel.setText("Bet: "+@currentRoundBet)
@@ -75,6 +76,7 @@ class PokerGame
             game.roundState++
             
         @dealButton.translate(@width-200, @height-75)
+        @drawPayouts()
     
     incrementBet: () ->
         if @roundState isnt 1
@@ -94,6 +96,20 @@ class PokerGame
             @hand.addToHand(@deck.dealCard())
     
     drawPayouts: () ->
+        payoutLabels = "Royal Flush\nStraight Flush\nFour of A Kind\nFull House\n" + 
+        "Flush\nStraight\nThree of A Kind\nTwo Pair\nJacks Or Better"
+        attrList = {"text-anchor": "start", "font-size":24 }
+        payoutCol1 = paper.text 0, 225, payoutLabels
+        payoutCol1.attr(attrList)
+        
+        # col 2 - payout values
+        values = _.values @evaluator.basePayouts
+        values.reverse()
+        attrList2 = {"text-anchor": "end", "font-size":24 }
+        payoutCol2 = paper.text 300, 225, values.join "\n"
+        payoutCol2.attr(attrList2)
+        
+
     
     
 window.PokerGame = PokerGame

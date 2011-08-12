@@ -15,7 +15,6 @@ class Button
             })
         @text = paper.print(options.x,options.y, options.text, paper.getFont("Droid Sans", "bold"), options.fontSize)
         @text.attr({fill:'white'})
-        console.log @text
     
     translate: (x,y) ->
         @rect.translate(x,y)
