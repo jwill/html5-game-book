@@ -34,7 +34,7 @@ class PokerGame
             stroke:'#000'  
         })
         @gameBoard.toBack()
-        @drawPayouts()
+       # @drawPayouts()
         
         #buttons and label
         @betButton = new Button({x:35, y:30, fontSize:48, text:"Bet"})
@@ -76,7 +76,6 @@ class PokerGame
             game.roundState++
             
         @dealButton.translate(@width-200, @height-75)
-        @drawPayouts()
     
     incrementBet: () ->
         if @roundState isnt 1
