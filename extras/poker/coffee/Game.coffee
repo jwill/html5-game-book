@@ -1,7 +1,7 @@
-##
- # Poker Game
- # @author jwill
- ##
+###
+  Poker Game
+  @author jwill
+###
 
 class PokerGame
     constructor: () ->
@@ -12,7 +12,7 @@ class PokerGame
         @currentRoundBet = 1
         @hand = new Hand()
         @evaluator = new Evaluator()
-        
+        @audio = new Audio("sounds/winn_up.wav")
         @init()
         self = this
         $(window).resize(() ->
@@ -25,7 +25,6 @@ class PokerGame
 
         
     init: () ->
-        
         @width = window.innerWidth - 25
         @height = window.innerHeight - 25
         window.paper = Raphael($("#gameboard")[0], @width, @height) if window.paper is undefined
@@ -69,10 +68,10 @@ class PokerGame
             game.hand.drawCards()
             game.hand.flipCards()
             winnings = game.evaluator.evaluate(game.hand)
-            console.log(winnings + " -" + game.roundState)
             if game.roundState is 1 and winnings > 0
                 game.playerTokens += (winnings * game.currentRoundBet)
                 game.tokensLabel.setText "Tokens: "+game.playerTokens
+                game.audio.play()
             game.roundState++
             
         @dealButton.translate(@width-200, @height-75)

@@ -43,14 +43,14 @@ class Evaluator
     	vals = _.pluck(hand.cards, "val")
     	vals.sort()
     	startValue = vals[0]
-    	for i in [0..5]
+    	for i in [0...5]
     		return false if startValue+i isnt vals[i]
     	return "StraightFlush"
     checkStraight: (hand) ->
     	vals = _.pluck(hand.cards, "val")
     	vals.sort()
     	startValue = vals[0]
-    	for i in [0..5]
+    	for i in [0...5]
     		return false if startValue+i isnt vals[i]
     	return "Straight" if vals is [1, 10, 11, 12, 13]
     	return "Straight"
