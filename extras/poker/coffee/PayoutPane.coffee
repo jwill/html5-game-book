@@ -7,23 +7,27 @@ class PayoutPane
         @col1X = 40
         @yCenter = 0
     draw: () ->
+        @remove()
         @rect = paper.rect(@col1X - 40, @yCenter + 75, 400, 300, 10)
         @payoutCol1 = paper.text @col1X, @yCenter + 225, @payoutLabels
         @payoutCol1.attr(@attrList)
         values = _.values game.evaluator.basePayouts
+        # apply muliplier for bet amount
+        values = (num*game.currentRoundBet for num in values)
         values.reverse()
         @payoutCol2 = paper.text @col1X+300, @yCenter + 225, values.join "\n"
         @payoutCol2.attr(@attrList2)
         
         #translate down 225 pix
-        
-    translate: (x, y) ->
-        @col1X += x
-        @yCenter += y
-        
+    
+    remove: () ->
         @rect.remove() if @rect
         @payoutCol1.remove() if @payoutCol1
         @payoutCol2.remove() if @payoutCol2
+    
+    translate: (x, y) ->
+        @col1X += x
+        @yCenter += y
         
         @draw()
         

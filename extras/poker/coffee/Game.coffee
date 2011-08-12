@@ -12,6 +12,7 @@ class PokerGame
         @currentRoundBet = 1
         @hand = new Hand()
         @evaluator = new Evaluator()
+        @payoutPane = new PayoutPane()
         @audio = new Audio("sounds/winn_up.wav")
         @init()
         self = this
@@ -40,6 +41,7 @@ class PokerGame
         @betButton = new Button({x:35, y:30, fontSize:48, text:"Bet"})
         @betButton.setOnClick ()->
             window.game.incrementBet()
+            window.game.payoutPane.draw()
             
         @betButton.translate(@width-200, @height-150)
         
@@ -95,18 +97,7 @@ class PokerGame
             @hand.addToHand(@deck.dealCard())
     
     drawPayouts: () ->
-        payoutLabels = "Royal Flush\nStraight Flush\nFour of A Kind\nFull House\n" + 
-        "Flush\nStraight\nThree of A Kind\nTwo Pair\nJacks Or Better"
-        attrList = {"text-anchor": "start", "font-size":24 }
-        payoutCol1 = paper.text 0, 225, payoutLabels
-        payoutCol1.attr(attrList)
         
-        # col 2 - payout values
-        values = _.values @evaluator.basePayouts
-        values.reverse()
-        attrList2 = {"text-anchor": "end", "font-size":24 }
-        payoutCol2 = paper.text 300, 225, values.join "\n"
-        payoutCol2.attr(attrList2)
         
 
     
