@@ -29,6 +29,9 @@ class Button
     setOnClick: (@func) ->
         @rect.click(@func)
         @text.click(@func)
+        @rect.attr({"cursor":"pointer"})
+        @text.attr({"cursor":"pointer"})
+        
         
     remove: () ->
         @rect.remove()
