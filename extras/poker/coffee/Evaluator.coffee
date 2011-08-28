@@ -11,6 +11,17 @@ class Evaluator
    			StraightFlush: 50
    			RoyalFlush: 250
    		}
+   		@labels = {
+   			JacksOrBetter: "Jacks Or Better"
+   			TwoPair: "Two Pair"
+   			ThreeKind: "Three of a Kind"
+   			Straight: "Straight"
+   			Flush: "Flush"
+   			FullHouse: "Full House"
+   			FourKind: "Four of a Kind"
+   			StraightFlush: "Straight Flush"
+   			RoyalFlush: "Royal Flush"
+   		}
     evaluate: (hand) ->
     	currentValue = 0
     	a = @checkFlush(hand)

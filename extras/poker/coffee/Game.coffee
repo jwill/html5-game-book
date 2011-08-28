@@ -5,7 +5,7 @@
 
 class PokerGame
     constructor: () ->
-        @deck = new Deck(3)
+        @deck = new Deck(1)
         @playerTokens = 500
         @maxTokens = 5
         @roundState = 0
