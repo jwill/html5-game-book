@@ -7,11 +7,11 @@ function Clock() {
     
     self.init = function () {
         self.currentTime = new Date()
-        var d = new ClockLine()
-        d.drawSquares();
+        self.d = new ClockLine()
+        self.d.drawSquares();
         var can = document.getElementById("gameboard");
         var runner = new Runner().setCanvas(can);
-        runner.root = d.components;
+        runner.root =self.d.components;
         runner.start();
     }
     
@@ -61,11 +61,36 @@ function ClockLine() {
             self.components.add(rect[0]).add(rect[1]);
         }
         
-    }
+    };
     
     self.setMaxValue = function(val) {
         self.maxValue = val;
     };
     
+    self.setValue = function(val) {
+        var binaryText = val.toString(2);
+        if (self.maxValue == 9) {
+            binaryText = binaryText.lpad("0", 4);
+        } else if (self.maxValue == 4) {
+            binaryText = binaryText.lpad("0", 3);
+        } else {
+            binaryText = binaryText.lpad("0", 2);
+        }
+        for (var i=0; i<binaryText.length; i++) {
+            var v = binaryText[i];
+            if (v == "0") {
+                self.components.getChild(i).setFill("red");
+            } else self.components.getChild(i).setFill("green");
+        }
+    }
+    
     self.init();
+}
+
+// Source: http://sajjadhossain.com/2008/10/31/javascript-string-trimming-and-padding/
+String.prototype.lpad = function(padString, length) {
+    var str = this;
+    while (str.length < length)
+        str = padString + str;
+    return str;
 }
