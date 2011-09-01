@@ -62,19 +62,15 @@ function Clock() {
         hrs = hrs.toString().lpad("0",2);
         mins = mins.toString().lpad("0",2);
         secs = secs.toString().lpad("0",2);
-
-        h1 = hrs[0]; h2 = hrs[1];
-        m1 = mins[0]; m2 = mins[1];
-        s1 = secs[0]; s2 = secs[1];
         
-        self.lines[0].setValue(h1);
-        self.lines[1].setValue(h2);
+        self.lines[0].setValue(hrs[0]);
+        self.lines[1].setValue(hrs[1]);
         
-        self.lines[2].setValue(m1);
-        self.lines[3].setValue(m2);
+        self.lines[2].setValue(mins[0]);
+        self.lines[3].setValue(mins[1]);
         
-        self.lines[4].setValue(s1);
-        self.lines[5].setValue(s2);
+        self.lines[4].setValue(secs[0]);
+        self.lines[5].setValue(secs[1]);
 
         // change the lines
        // console.log(new Date());

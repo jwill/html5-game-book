@@ -1,10 +1,22 @@
 apply plugin: 'java'
+apply plugin:'application'
 
 repositories {
 	mavenCentral()
 	flatDir(dirs:file('lib'))
 }
 
+dependencies {
+	compile name:'amino'
+	compile group:'commons-lang', name:'commons-lang', version:'2.6'
+}
+
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+}
+
 task createWrapper(type: Wrapper) {
 	gradleVersion = "1.0-milestone-3"
 }
+
+mainClassName = "BinaryClock"
