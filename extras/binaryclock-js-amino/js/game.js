@@ -27,7 +27,7 @@ function Clock() {
         }
         
         self.lines[0].setMaxValue(4);
-        self.lines[1].setMaxValue(4);
+        self.lines[1].setMaxValue(8);
         
         self.lines[2].setMaxValue(4);
         self.lines[3].setMaxValue(8);
@@ -37,7 +37,6 @@ function Clock() {
         
         // Alignment
         self.lines[0].components.setY(60);
-        self.lines[1].components.setY(60);
         self.lines[2].components.setY(60); 
         self.lines[4].components.setY(60);
         

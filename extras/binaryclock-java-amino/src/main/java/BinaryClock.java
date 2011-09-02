@@ -29,7 +29,7 @@ public class BinaryClock extends Core implements Callback {
 		}
 		
 		lines.get(0).setMaxValue(4);
-		lines.get(1).setMaxValue(4);
+		lines.get(1).setMaxValue(8);
 		
 		lines.get(2).setMaxValue(4);
 		lines.get(3).setMaxValue(8);
@@ -48,7 +48,6 @@ public class BinaryClock extends Core implements Callback {
 		
 		// Alignment
 		group.getChild(0).setY(60);
-		group.getChild(1).setY(60);
 		
 		group.getChild(2).setY(60);
 		group.getChild(4).setY(60);
