@@ -1,4 +1,4 @@
-function Clock() {
+function BinaryClock() {
     if ( !(this instanceof arguments.callee) ) {
         return new arguments.callee(arguments); 
     }
