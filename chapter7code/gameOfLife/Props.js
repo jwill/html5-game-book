@@ -1,6 +1,6 @@
 var Props = {
 	CELL_LEN:0.5,
-	MAX_TRANS: 100.0,
+	MAX_TRANS: 8,
 	CELL_SPACING:6,
 	COLORS:{
 		red:0xFF0000,

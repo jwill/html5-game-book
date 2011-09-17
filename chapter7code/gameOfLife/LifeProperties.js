@@ -17,8 +17,8 @@ var LifeProperties = Class.create({
 			this.NUM_NEIGHBORS = 26;
 			this.MIN_LEN = 50;
 			
-			this.BIRTH_RANGE = {4:true, 5:true};
-			this.DIE_RANGE = {3:true, 4:false, 5:true, 6:true};
+			this.BIRTH_RANGE = { 5:true};
+			this.DIE_RANGE = {3:true, 4:true, 5:true, 6:true};
 		},
 		getSpeed: function() {
 			prop = this.life3DProps["speed"];

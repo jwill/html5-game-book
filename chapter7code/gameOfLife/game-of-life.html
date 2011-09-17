@@ -34,7 +34,7 @@
 				renderer = new THREE.WebGLRenderer();
 				renderer.setSize (WIDTH, HEIGHT);
 				camera = new THREE.Camera(FOV, ASPECT, NEAR, FAR);
-				camera.position.z = 25;
+				camera.position.z = 50;
 				//camera.position.y = 30;
 				
 				scene = new THREE.Scene();
@@ -69,8 +69,9 @@
 			}
 			
 			function render() {
-				if (grid.transCounter < Props.MAX_TRANS)
+				//if (grid.transCounter < Props.MAX_TRANS)
 					grid.update();
+				//sleep(50);
 			//	else grid.resetGrid();
 				renderer.render(scene, camera);
 			}

@@ -46,9 +46,9 @@ var CellsGrid = Class.create({
 		else this.turnAngle = Props.ROTATE_AMT;
 	},
 	update: function() {
-		this.stateChange();
+		
 		if (this.transCounter == 0) {
-			
+			this.stateChange();
 			this.turnAxis = Math.floor(Math.random()*3);
 			this.transCounter = 1;
 		} else {
@@ -69,7 +69,7 @@ var CellsGrid = Class.create({
 		for (var i=0; i<Props.GRID_LEN; i++) {
 			for (var j=0; j<Props.GRID_LEN; j++) {
 				for (var k=0; k<Props.GRID_LEN; k++) {
-					willLive = this.aliveNextState(i, j, k);
+					var willLive = this.aliveNextState(i, j, k);
 					(this.cells[i][j][k]).newAliveState(willLive);
 				}
 			}

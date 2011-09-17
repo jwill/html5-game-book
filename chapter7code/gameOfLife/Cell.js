@@ -28,7 +28,7 @@ var Cell = Class.create({
 		},
 		reset: function() {
 			this.age = 0;
-			this.alive = (Math.random() < 0.1) ? true : false;
+			this.alive = (Math.random() < 0.5) ? true : false;
 			this.makeMaterial();
 		},
 		makeMaterial: function() {
@@ -46,8 +46,8 @@ var Cell = Class.create({
 		},
 		resetColors:function() {
 			this.cellColor = Props.COLORS.blue;
-			this.oldColor = Props.COLORS.white;
-			this.newColor = Props.COLORS.blue;
+			this.oldColor = this.cellColor;
+			this.newColor = this.cellColor;
 			this.setMaterialColors(this.cellColor);
 		},
 		setMaterialColors:function(hexColor) {
@@ -64,7 +64,7 @@ var Cell = Class.create({
 			} else {
 				this.visualState = Props.STATES.INVISIBLE;
 				this.material.opacity = 0.0;
-				this.age = 0;
+				//this.age = 0;
 			}
 		},
 		
@@ -133,7 +133,8 @@ var Cell = Class.create({
 			this.oldColor = this.cellColor;
 			this.newColor = this.cellColor;
 			
-			this.isAlive = this.newAliveState;
+			this.alive = this.newAlive;
+		//	this.newAliveState = null;
 			
 			if (this.visualState == Props.STATES.FADE_IN)
 				this.visualState = Props.STATES.VISIBLE;
