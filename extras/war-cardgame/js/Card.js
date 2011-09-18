@@ -33,52 +33,29 @@ function Card(ordinal, val, suit) {
         self.meta = new Object();
     }
     
-    self.testdrawCard = function () {        
-        var rect = paper.rect(self.xPos+100, self.yPos+30, 60, 50).attr("fill","#FFF");
-        var t = paper.text(self.xPos+130, self.yPos+50, self.ord+"-"+self.suit)
-    }
-    
     self.findXPos = function() {
-    		// could do variable spacing here
-    		self.xPos = 10 + (self.positionInHand *189)  
     }
     
     self.findYPos = function() {
-        // InnerHeight - the height of the card
-        var h = window.paper.height - 245 - 10 ;
-        self.yPos = h;
-    }
-    
-    self.drawHoldButton = function() {
-        var x = self.xPos + 55
-        var y = self.yPos - 50
-        if (self.holdButton) self.holdButton.remove();
-        if (self.state) {
-            self.holdButton = new Button({x:5, y:20, fontSize:20, text:"Held", color:'red', dims:{x:55, y:35}})
-        } else {
-            self.holdButton = new Button({x:5, y:20, fontSize:20, text:"Hold", color:'blue', dims:{x:55, y:35}})
-        }
-            
-        self.holdButton.translate(x, y)
     }
     
     
     self.drawCard = function() { 
-        self.findXPos()
-        self.findYPos()
-        if (self.cardBack == undefined)
-            self.cardBack = paper.image( self.cardBackPath, self.xPos, self.yPos, 169, 245)
-        if (self.cardFront == undefined)
-        self.cardFront = paper.image(self.cardFrontPath, self.xPos, self.yPos, 169, 245)
-        self.cardFront.attr("opacity", 0.0)
+        //self.findXPos()
+        //self.findYPos()
+        if (self.cardBack == undefined) {
+            self.cardBack = new ImageView( self.cardBackPath);
+        //    self.cardBack.setX(self.xPos);
+        //    self.cardBack.setY(self.yPos);
+        }
+        if (self.cardFront == undefined) {
+        		self.cardFront = new ImageView( self.cardFrontPath);
+        //    self.cardFront.setX(self.xPos);
+        //    self.cardFront.setY(self.yPos);
+        }
+        
         self.flipCard();
-        self.cardFront.attr({"cursor":"pointer"})
-         self.cardFront.click(function() {
-            // toggle state for card
-            self.state = !self.state;
-            self.drawHoldButton();
-        });
-       self.drawHoldButton();
+        
     }
     
     self.trashCard = function() {
@@ -93,17 +70,17 @@ function Card(ordinal, val, suit) {
         self.frontShown = !self.frontShown;
         
         if (self.frontShown) {
-            self.cardBack.animate({opacity:0.0}, 1000)
-            self.cardFront.animate({opacity:1}, 1000)
+      //      self.cardBack.animate({opacity:0.0}, 1000)
+      //      self.cardFront.animate({opacity:1}, 1000)
         } else {
-            self.cardFront.animate({opacity:0.0}, 1000)
-            self.cardBack.animate({opacity:1}, 1000)
+      //      self.cardFront.animate({opacity:0.0}, 1000)
+      //      self.cardBack.animate({opacity:1}, 1000)
         }        
         
     }
     
     self.discard = function() {
-        self.cardFront.animate({opacity:0.0}, 1000, "bounce")     
+       // self.cardFront.animate({opacity:0.0}, 1000, "bounce")     
         self.meta['hidden'] = true;
     }
     

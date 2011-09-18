@@ -56,10 +56,6 @@ function Deck(numDecks) {
     self.dealCard = function() {
         if (self.cards.length > 0)
             return self.cards.pop();
-        else {
-            self.init();
-            return self.cards.pop();
-        }
     }
     
     self.dealCards = function(num) {

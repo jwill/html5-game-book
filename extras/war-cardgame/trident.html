@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<title>Trident.js Demos</title>
+		<script type="text/javascript" src="js/trident.js"></script>
+	</head>
+	<body>
+		Regular transition:<br/>
+		<span id="myspan" onmouseover="rolloverTimeline.play();" 
+  			onmouseout="rolloverTimeline.playReverse();">Some text</span><br/>
+		Keyframe transition:<br/>
+		<span id="keyframespan" onmouseover="keyframeTimeline.play();" 
+			onmouseout="keyframeTimeline.playReverse();">Some keyframe text</span>
+<script>
+  var rolloverTimeline = new Timeline(myspan.style);
+  rolloverTimeline.addPropertiesToInterpolate([
+	{ property: "font-size", from:16, to: 36,
+	  interpolator: new IntPropertyInterpolator()},
+	{ property: "color", from:"rgb(0,0,0)", to:"rgb(255,0,0)",
+	  interpolator: new RGBPropertyInterpolator()
+	}
+  ]);
+  // over the period of 2 seconds
+  rolloverTimeline.duration = 2000;
+  
+  var keyframeTimeline = new Timeline(keyframespan.style);
+  keyframeTimeline.addPropertiesToInterpolate([
+  	{   property: "font-size", from:16, to:36,
+		interpolator: new IntPropertyInterpolator()
+	},
+	{
+		property:"color", 
+		goingThrough: {0: "rgb(0,0,0)", 0.4:"rgb(0,255,0)", 0.8:"rgb(0,0,255)", 1:"rgb(200,140,140)"},
+		interpolator: new RGBPropertyInterpolator()
+	}
+  ]);
+  keyframeTimeline.duration = 3000;
+</script>
+		
+	</body>
+</html>
