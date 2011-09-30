@@ -1,7 +1,7 @@
 var Props = {
 	CELL_LEN:0.5,
 	MAX_TRANS: 8,
-	CELL_SPACING:6,
+	CELL_SPACING:10,
 	COLORS:{
 		red:0xFF0000,
 		green:0x00FF00,
@@ -11,7 +11,7 @@ var Props = {
 		black:0x000000,
 		white:0xFFFFFF
 	},
-	GRID_LEN:7,
+	GRID_LEN:10,
 	ROTATE_AMT:4,
 	STATES: {
 		INVISIBLE:0,

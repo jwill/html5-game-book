@@ -34,11 +34,12 @@
 				renderer = new THREE.WebGLRenderer();
 				renderer.setSize (WIDTH, HEIGHT);
 				camera = new THREE.Camera(FOV, ASPECT, NEAR, FAR);
-				camera.position.z = 50;
+				camera.position.z = 60;
 				//camera.position.y = 30;
 				
 				scene = new THREE.Scene();
-				drawScene();
+				loadModel();
+				//drawScene();
 				
 				
 				// add lighting
@@ -54,9 +55,15 @@
 				document.body.appendChild(renderer.domElement);
 			}
 			
-			function drawScene() {
+			function drawScene(m) {
+				window.suzanne = m;
 				grid = new CellsGrid(new LifeProperties("{}"));
 				
+			}
+			
+			function loadModel() {
+				var loader = new THREE.JSONLoader();
+				loader.load( {model: "suzanne.js", callback: drawScene });
 			}
 			
 			function v(x,y,z) {

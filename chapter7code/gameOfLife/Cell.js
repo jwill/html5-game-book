@@ -16,15 +16,16 @@ var Cell = Class.create({
 			this.alive = (Math.random() < 0.1) ? true : false;
 			this.makeMaterial();
 			this.mesh = new THREE.Mesh(
-					sphereGeometry, this.material
+					window.suzanne, this.material
 			);
-			
+						
 			this.mesh.position.x = x * Props.CELL_LEN * Props.CELL_SPACING;
 			this.mesh.position.y = y * Props.CELL_LEN * Props.CELL_SPACING;
 			this.mesh.position.z = z * Props.CELL_LEN * Props.CELL_SPACING;
 			this.visualState = Props.STATES.INVISIBLE;
 			this.setVisibility();
 			scene.addObject(this.mesh);
+		
 		},
 		reset: function() {
 			this.age = 0;
