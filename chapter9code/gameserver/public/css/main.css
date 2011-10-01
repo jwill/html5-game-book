@@ -1,3 +1,7 @@
+div#content {
+	padding-top: 40px;
+}
+
 /*Lightbox effect */
 .black_overlay {
 		display: none;
