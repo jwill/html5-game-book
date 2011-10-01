@@ -25,7 +25,7 @@ exports.GameRoom = (nowjs, everyone, cache)->
 				user = this.user.clientId
 				#try to get game state
 				group.now.receiveMessage("System", user + " left the game room "+ roomName+".")
-			rooms = cache.get('gamerooms')
+			rooms = cache.get('rooms')
 			if (rooms is null or room is undefined)
 				rooms = {}
 			rooms[roomName] = room
@@ -39,6 +39,8 @@ exports.GameRoom = (nowjs, everyone, cache)->
 		room = rooms[roomName]
 		group = nowjs.getGroup(room)
 		group.addUser(this.user.clientId)
+		console.log(room)
+		console.log(roomName)
 		callback(roomName)
 	
 	everyone.now.leaveRoom = (roomName, callback) ->
@@ -49,5 +51,5 @@ exports.GameRoom = (nowjs, everyone, cache)->
 		
 	everyone.now.getRooms = (callback) ->
 		rooms = cache.get("rooms")
-		console.log("getRooms"+rooms)
+		console.log("getRooms"+sys.inspect(rooms))
 		callback(rooms)

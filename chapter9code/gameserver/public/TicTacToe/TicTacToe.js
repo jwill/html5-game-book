@@ -2,7 +2,9 @@
  * @author jwill
  */
 initTTTGame = function () {
-	
+
+
+
 }
 
 now.drawTTTXSprite = function (x, y) {
@@ -62,6 +64,39 @@ now.drawTTTGameBoard = function() {
 		ctx.lineTo(600,400);
 		
 		ctx.stroke();
+		
+		// Add click handler
+		window.canvas = $("#board").get(0)
+		
+		var handleMouseClick = function(evt) {
+				x = evt.clientX - canvas.offsetLeft;
+				y = evt.clientY - canvas.offsetTop;
+				window.clicked = {'x':x, 'y':y};
+				console.log("x,y:"+x+","+y);
+				
+				// 
+				function findCorrected(val) {
+					if (0 <= val && val <= 190)
+						return 0;
+					else if (210 <= val && val <= 390)
+						return 1;
+					else if (410 <= val && val <= 590)
+						return 2;
+				}
+				
+				// TODO: Check to see if valid user
+				var correctedX = findCorrected(x);
+				var correctedY = findCorrected(y);
+				console.log(correctedX + " " +correctedY);
+				var cb = function(data) {
+					console.log(data)
+				};
+			now.completeTicTacToeMove(window.roomName, correctedX, correctedY, 'X', cb)
+		}
+		
+		
+		
+		canvas.addEventListener("click", handleMouseClick, false);
 }
 
 now.receiveGameState = function (state) {
@@ -86,21 +121,6 @@ now.receiveGameState = function (state) {
 	// Show message
 	context = canvas.getContext("2d");
 	context.fillText(state.message, 700, 400);
-}
-
-$().ready(function () {
-window.canvas = $("#board").get(0)
-
-handleMouseClick = function(evt) {
-		x = evt.clientX - canvas.offsetLeft;
-		y = evt.clientY - canvas.offsetTop;
-		
-		console.log("x,y:"+x+","+y);
-}
-
-canvas.addEventListener("click", handleMouseClick, false);
-});
-	
-	
+};
 
 

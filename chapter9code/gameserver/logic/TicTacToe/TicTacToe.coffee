@@ -16,6 +16,7 @@ exports.TicTacToe = (nowjs, everyone, cache) ->
 				array.push("-")
 			gameboard.push(array)
 		roomState.board = gameboard
+		roomState.players = []
 		console.log(roomState)
 		cache.put(room, roomState)
 		group.now.drawTTTGameBoard();
