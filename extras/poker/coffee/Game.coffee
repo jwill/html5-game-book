@@ -87,10 +87,10 @@ class PokerGame
             winnings = game.evaluator.evaluate(game.hand)
             if game.roundState is 1
                 winnings = 0 if winnings is -Infinity
-                game.playerTokens += (winnings * game.currentRoundBet)
+                game.playerTokens += (winnings[0] * game.currentRoundBet)
                 game.tokensLabel.setText "Tokens: "+game.playerTokens
-                game.message.setText "Won " +(winnings * game.currentRoundBet)
-                game.audio.play() if winnings > 0 and game.soundOn is on
+                game.message.setText winnings[1]  if winnings[0] > 0
+                game.audio.play() if winnings[0] > 0 and game.soundOn is on
             game.roundState++
         
         @dealButton.translate(@width-200, @height-75)

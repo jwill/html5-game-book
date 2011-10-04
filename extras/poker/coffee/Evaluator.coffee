@@ -31,9 +31,14 @@ class Evaluator
     	e = @checkStraight(hand)
     	f = @checkTwoPair(hand)
     	g = @checkJacksOrBetter(hand)
+    	labels = _.compact([a,b,c,d,e,f,g])
     	values = (@basePayouts[val] for val in [a,b,c,d,e,f,g])
     	values = _.compact(values)
-    	_.max(values)
+    	winnings = _.max(values)
+    	for msg in labels
+    		if (@basePayouts[msg] == winnings)
+    			return [winnings, @labels[msg]]
+    	return [0, "0"]
     	
     checkRoyalFlush: (hand) ->
     	vals = _.pluck(hand.cards, "val")
