@@ -13,21 +13,22 @@ function WarGame() {
 		self.runner.root = self.group;
 		//runner.addCallback(self.setTime);
 		self.runner.start();
+		self.createHands();
 	};
 	
 	self.createHands = function () {
 		self.deck = new Deck(1);
 		self.playerOne = new Hand();
-		self.playerTwo = new Hand();
+		self.computer = new Hand();
 		
 		// deal cards
 		while ( self.deck.cards.length != 0 ) {
 			self.playerOne.addToHand(self.deck.dealCard());
-			self.playerTwo.addToHand(self.deck.dealCard());
+			self.computer.addToHand(self.deck.dealCard());
 		}
 	}
 	
-	self.evaluateHands= function(handOne, handTwo) {
+	self.evaluateHands = function(handOne, handTwo) {
 		
 	}
 	
