@@ -31,6 +31,8 @@ function Card(ordinal, val, suit) {
         self.cardBackPath = "images/90dpi/back.png";
         self.cardFrontPath = "images/90dpi/"+self.ord+"_"+self.suit+".png";       
         self.meta = new Object();
+        self.cardBack = new CachedImageView(backImage, 169, 245);
+        self.cardFront = new ImageView( self.cardFrontPath);
     }
     
     self.findXPos = function() {
@@ -39,24 +41,6 @@ function Card(ordinal, val, suit) {
     self.findYPos = function() {
     }
     
-    
-    self.drawCard = function() { 
-        //self.findXPos()
-        //self.findYPos()
-        if (self.cardBack == undefined) {
-            self.cardBack = new ImageView( self.cardBackPath);
-        //    self.cardBack.setX(self.xPos);
-        //    self.cardBack.setY(self.yPos);
-        }
-        if (self.cardFront == undefined) {
-        		self.cardFront = new ImageView( self.cardFrontPath);
-        //    self.cardFront.setX(self.xPos);
-        //    self.cardFront.setY(self.yPos);
-        }
-        
-        self.flipCard();
-        
-    }
     
     self.trashCard = function() {
         self.cardBack.remove();

@@ -5,26 +5,6 @@ backImage.onload = function() {
 }
 backImage.src = "images/90dpi/back.png"
 
-function PlayerDeck() { 
-    var self = this;
-    self.init = function () {
-        self.back = new CachedImageView(backImage, 169, 245);
-    };
-    self.setX = function(xPos) {
-        self.back.setX(xPos);    
-    };
-    self.setY = function(yPos) {
-        self.back.setY(yPos);    
-    };
-    self.getPrimitive = function() {
-        return self.back;    
-    };
-    
-    self.init();
-}
-
-
-
 function WarGame() {
 	if ( !(this instanceof arguments.callee) ) {
         return new arguments.callee(arguments); 
@@ -40,17 +20,14 @@ function WarGame() {
 		self.runner.root = self.group;
 		//runner.addCallback(self.setTime);
 		self.runner.start();
-		self.createHands();
-        
-        // Add listener to 
-         
+		self.createHands();         
 	};
 	
 	self.createHands = function () {
 		self.deck = new Deck(1);
 		self.playerOne = new Hand();
 		self.computer = new Hand();
-        self.turn = "player";
+        self.playerTurn = true;
 		
 		// deal cards
 		while ( self.deck.cards.length != 0 ) {
@@ -58,11 +35,11 @@ function WarGame() {
 			self.computer.addToHand(self.deck.dealCard());
 		}
         
-        self.playerOneDeck = new CachedImageView(backImage, 169, 245);;
+        self.playerOneDeck = new CachedImageView(backImage, 169, 245);
         self.playerOneDeck.setX(50);
         self.playerOneDeck.setY(50);
         
-        self.computerDeck = new CachedImageView(backImage, 169, 245);;
+        self.computerDeck = new CachedImageView(backImage, 169, 245);
         self.computerDeck.setX(981);
         self.computerDeck.setY(50);
         
@@ -81,16 +58,47 @@ function WarGame() {
         self.computerCardText.setFill("black");
         self.computerCardText.setText(self.numComputerCards + " cards")
         
-        self.runner.listen("MOUSE_PRESS", self.playerOneDeck, function(evt){console.log("clicked player deck");});
+        self.runner.listen("MOUSE_PRESS", self.playerOneDeck, self.clickListener);
+        self.runner.listen("COMPUTER_TURN", null, self.computerListener);
         
         self.group.add(self.playerCardText);
         self.group.add(self.computerCardText);
         self.group.add(self.playerOneDeck);
         self.group.add(self.computerDeck);
 	}
+    
+    self.clickListener = function (evt) {
+        // TODO Only if it is the players turn
+        var card = self.playerOne.playCard();
+        console.log(card);
+        if (card[0]) {
+            card[0].cardFront.x=239;
+            card[0].cardFront.y=50;
+            self.group.add(card[0].cardFront);
+            self.numPlayerCards--;
+            self.playerCardText.setText(self.numPlayerCards + " cards");
+        }
+        
+    }
+    
+    self.computerListener = function (evt) {
+        // TODO: Make event type for computer player
+        console.log(evt)    
+    }
 	
 	self.evaluateHands = function(handOne, handTwo) {
-		
+		var handOneSize = handOne.length;
+        var handTwoSize = handTwo.length;
+        
+        var handOneCard = handOne[handOneSize-1];
+        var handTwoCard = handTwo[handTwoSize-1];
+        if (handOneCard.val > handTwoCard.val) {
+            
+        } else if (handOneCard.val > handTwoCard.val) {
+            
+        } else {
+            // War   
+        }
 	}
 	
 	self.init();

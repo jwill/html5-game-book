@@ -14,12 +14,11 @@ function Hand() {
   }
   
   self.playCard = function () {
-  
+    // Returns the card from the front of the deck;
+    return self.cards.splice(0,1);
   }
   
-  self.drawHand = function () {
-  	// Draws the back of the card to give player clickable area.
-  }
+  
             
   self.init();
 }                                                
