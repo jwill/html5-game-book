@@ -12,8 +12,8 @@ function Game() {
 	self.gameLoop = null;
 	
 	self.init = function() {
-		self.canvas = $("#game").get(0);
-		self.context = $("#game").get(0).getContext("2d");
+		self.canvas = document.getElementById("game");
+		self.context = self.canvas.getContext("2d");
 		self.sequence = null;
 		self.position = 0;
 		self.currentRound = 1;
