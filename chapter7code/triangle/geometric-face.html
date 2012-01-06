@@ -6,10 +6,10 @@
 		<script src="../RequestAnimationFrame.js"></script>
 	</head>
 	<body>
-		<div id="container"/>
+		<div id="container"></div>
 		<script id="fragmentShader" type="x-shader/x-fragment">
 			#ifdef GL_ES
-			precision highp float;
+			precision mediump float;
 			#endif
 			
 			varying vec4 vColor;
@@ -21,7 +21,7 @@
 		
 		<script id="vertexShader" type="x-shader/x-vertex">
 			#ifdef GL_ES
-			precision highp float;
+			precision mediump float;
 			#endif
 
 			void main(void) {
