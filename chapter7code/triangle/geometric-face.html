@@ -3,14 +3,13 @@
 <head>
 		<title>Triangle Three.js Demo</title>
 		<script src="../Three.js"></script>
-		<script src="../zepto.min.js"></script>
 		<script src="../RequestAnimationFrame.js"></script>
 	</head>
 	<body>
-		<div id="container"/>
+		<div id="container"></div>
 		<script id="fragmentShader" type="x-shader/x-fragment">
 			#ifdef GL_ES
-			precision highp float;
+			precision mediump float;
 			#endif
 			
 			varying vec4 vColor;
@@ -22,7 +21,7 @@
 		
 		<script id="vertexShader" type="x-shader/x-vertex">
 			#ifdef GL_ES
-			precision highp float;
+			precision mediump float;
 			#endif
 
 			void main(void) {
@@ -64,7 +63,8 @@
 				scene.addLight(light);
 				
 				// attach the scene to the DOM
-				$("#container").get(0).appendChild(renderer.domElement);
+				container = document.getElementById("container");
+				container.appendChild(renderer.domElement);			
 			}
 		
 			function drawTriangle() {
@@ -73,9 +73,11 @@
 				geoMaterial = new THREE.MeshLambertMaterial({
 						color:0xFF00FF
 				});
+				vertShader = document.getElementById("vertexShader");
+				fragShader = document.getElementById("fragmentShader");
 				shaderMaterial = new THREE.MeshShaderMaterial({
-						vertexShader: $('#vertexShader').get(0).innerHTML,
-						fragmentShader: $('#fragmentShader').get(0).innerHTML,
+						vertexShader: vertShader.innerHTML,
+						fragmentShader: fragShader.innerHTML,
 						vertexColors: true
 				});
 				

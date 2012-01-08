@@ -20,10 +20,10 @@ function Game() {
 			self.spritesArray.push(tempArray);
 		}
 		self.isXsTurn = true;
-		self.canvas = $("#board").get(0)
+		self.canvas = document.getElementById("board");
 		self.canvas.addEventListener("click", self.handleMouseClick, false);
 
-		self.context = $("#board").get(0).getContext("2d");
+		self.context = self.canvas.getContext("2d");
 		self.drawGameBoard();
 	}
 	

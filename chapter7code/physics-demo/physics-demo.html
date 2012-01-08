@@ -3,7 +3,6 @@
 <head>
 		<title>Physics Demo</title>
 		<script src="../Three.js"></script>
-		<script src="../zepto.min.js"></script>
 		<script src="../RequestAnimationFrame.js"></script>
 		<script src="jiglibjs.0.9.0.2.js"></script>
 	</head>
@@ -46,7 +45,8 @@
 				scene.addLight(light);
 				
 				// attach the scene to the DOM
-				$("#container").get(0).appendChild(renderer.domElement);
+				container = document.getElementById("container");
+				container.appendChild(renderer.domElement);
 			}
 			
 			function drawScene() {
