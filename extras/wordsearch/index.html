@@ -15,23 +15,29 @@
     </head>
     <body style="background-color: #000000;">
         <script type="text/coffeescript">
-          window.game = null
-          $.getJSON "puzzles.json",(data) -> 
-            window.puzzles = data
-            window.game = new WordSearchGame(puzzles)
-            window.game.drawGrid()
+					window.game = null
+					
+					req = new XMLHttpRequest()
+					req.onreadystatechange = () ->
+						if req.readyState is 4 and req.status is 200
+							data = eval(req.responseText)
+							window.puzzles = data
+							window.game = new WordSearchGame(puzzles)
+							window.game.drawGrid()
+					req.open("GET", "puzzles.json")
+					req.send()
+
+					window.previousPuzzle = () ->
+						prevPuzzle = window.game.currentPuzzle - 1
+						if window.puzzles[prevPuzzle] isnt undefined
+							window.game.setPuzzle(prevPuzzle)
+							window.game.drawGrid()
           
-          window.previousPuzzle = () ->
-          	prevPuzzle = window.game.currentPuzzle - 1
-          	if window.puzzles[prevPuzzle] isnt undefined
-          		window.game.setPuzzle(prevPuzzle)
-          		window.game.drawGrid()
-          
-          window.nextPuzzle = () ->
-          	nextPuzzle = window.game.currentPuzzle + 1
-          	if window.puzzles[nextPuzzle] isnt undefined
-          		window.game.setPuzzle(nextPuzzle)
-          		window.game.drawGrid()
+					window.nextPuzzle = () ->
+						nextPuzzle = window.game.currentPuzzle + 1
+						if window.puzzles[nextPuzzle] isnt undefined
+							window.game.setPuzzle(nextPuzzle)
+							window.game.drawGrid()
         </script>
         
     </body>
